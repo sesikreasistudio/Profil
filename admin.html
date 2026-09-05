@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - SESIKREASI Studio</title>
+    <meta name="description" content="Panel pengelola data layanan, pencatatan pesanan, dan ringkasan pendapatan studio SESIKREASI." />
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="admin-body" id="adminApp">
+    <!-- Admin Top Navbar -->
+    <header class="admin-navbar">
+      <div class="container">
+        <div class="admin-nav-inner">
+          <a href="index.html" class="logo" style="font-size:1.15rem;">
+            <span class="logo-symbol">S</span>
+            <span>SESI<span class="logo-accent">KREASI</span> <span style="font-size:0.8rem;color:#4B5563;font-weight:600;">Admin</span></span>
+          </a>
+
+          <div style="display:flex;align-items:center;gap:0.75rem;" id="adminNavActions">
+            <span class="badge badge-purple" style="display:none;" id="desktopStorageBadge">LocalStorage Active</span>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnAdminLogout" style="display:none;color:#DC2626;border-color:#FCA5A5;" title="Kunci & Keluar dari Dashboard">
+              <span>🔒 Kunci / Keluar</span>
+            </button>
+            <a href="index.html" class="btn btn-outline btn-sm" id="btnBackToWebsite">
+              <span>← Ke Website Utama</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Admin Password Gate Modal (Proteksi Akses) -->
+    <div id="adminAuthModal" class="admin-auth-overlay" style="display: flex;">
+      <div class="admin-auth-card">
+        <div class="admin-auth-icon">🔒</div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--color-text-main); margin-bottom: 0.35rem;">
+          Akses Khusus Admin
+        </h2>
+        <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
+          Halaman ini dilindungi kata sandi. Masukkan sandi untuk mengelola data & melihat keuangan studio <strong>SESIKREASI</strong>.
+        </p>
+
+        <form id="adminAuthForm" style="margin-top: 1.5rem;">
+          <div class="form-group" style="text-align: left;">
+            <label for="adminAuthPassword" class="form-label">Kata Sandi Admin</label>
+            <div style="position: relative;">
+              <input 
+                type="password" 
+                id="adminAuthPassword" 
+                class="form-input" 
+                placeholder="Masukkan kata sandi..." 
+                autocomplete="current-password"
+                required 
+                style="padding-right: 2.75rem;"
+              />
+              <button 
+                type="button" 
+                id="toggleAuthPassVisibility" 
+                title="Lihat / Sembunyikan Sandi"
+                style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.15rem; cursor: pointer; color: var(--color-text-muted); padding: 4px;"
+              >
+                👁️
+              </button>
+            </div>
+            <div id="adminAuthError" style="display: none; color: #DC2626; font-size: 0.85rem; font-weight: 600; margin-top: 0.6rem; background: #FEF2F2; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid #FCA5A5; text-align: left;">
+              ⚠️ Kata sandi salah. Silakan coba lagi!
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem;">
+            <button type="submit" class="btn btn-primary btn-block" id="btnSubmitAuth">
+              <span>🔓 Buka Dashboard</span>
+            </button>
+            <a href="index.html" class="btn btn-ghost btn-block" style="text-align: center;">
+              <span>← Kembali ke Website Utama</span>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Content Container (Hidden until authenticated) -->
+    <main class="container" id="adminMainContainer" style="padding-top:1.5rem;padding-bottom:3rem;display:none;">
+      <!-- Title & Welcome -->
+      <div style="margin-bottom:1.5rem;">
+        <h1 style="font-size:1.75rem;font-weight:800;color:var(--color-text-main);line-height:1.2;">
+          Dashboard Pengelola Usaha
+        </h1>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);">
+          Kelola katalog layanan, catat pesanan pelanggan, dan pantau otomatis total omzet pendapatan SESIKREASI.
+        </p>
+      </div>
+
+      <!-- Navigation Tabs (Mobile-friendly horizontal scroll) -->
+      <div class="admin-tabs" id="adminTabButtons">
+        <button type="button" class="admin-tab-btn active" data-target="tabOverview" id="tabBtnOverview">
+          <span>📊 Ringkasan</span>
+        </button>
+        <button type="button" class="admin-tab-btn" data-target="tabOrders" id="tabBtnOrders">
+          <span>📋 Catatan Pesanan</span>
+        </button>
+        <button type="button" class="admin-tab-btn" data-target="tabServices" id="tabBtnServices">
+          <span>🎨 Kelola Layanan</span>
+        </button>
+        <button type="button" class="admin-tab-btn" data-target="tabSettings" id="tabBtnSettings">
+          <span>⚙️ Pengaturan Studio</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: OVERVIEW / RINGKASAN -->
+      <section id="tabOverview" class="admin-tab-panel">
+        <!-- Metric Cards -->
+        <div class="metrics-grid">
+          <!-- Total Revenue (Automated Summary) -->
+          <div class="metric-card" id="cardMetricRevenue">
+            <div class="metric-icon-box metric-icon-green">💰</div>
+            <div>
+              <div class="metric-label">Total Pendapatan (Selesai)</div>
+              <div class="metric-value" id="metricRevenue">Rp 0</div>
+            </div>
+          </div>
+
+          <!-- Total Orders -->
+          <div class="metric-card" id="cardMetricTotalOrders">
+            <div class="metric-icon-box metric-icon-purple">📦</div>
+            <div>
+              <div class="metric-label">Total Pesanan</div>
+              <div class="metric-value" id="metricTotalOrders">0</div>
+            </div>
+          </div>
+
+          <!-- Active Orders (Pending + Processing) -->
+          <div class="metric-card" id="cardMetricActiveOrders">
+            <div class="metric-icon-box metric-icon-amber">⏳</div>
+            <div>
+              <div class="metric-label">Pesanan Aktif</div>
+              <div class="metric-value" id="metricActiveOrders">0</div>
+            </div>
+          </div>
+
+          <!-- Total Services -->
+          <div class="metric-card" id="cardMetricTotalServices">
+            <div class="metric-icon-box metric-icon-blue">✨</div>
+            <div>
+              <div class="metric-label">Layanan Aktif</div>
+              <div class="metric-value" id="metricTotalServices">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Preview -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Pesanan Terbaru Masuk</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">Daftar 5 pesanan terkini yang dicatat ke sistem.</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('tabBtnOrders').click();">
+              <span>Lihat Semua Pesanan →</span>
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>No. Order</th>
+                  <th>Nama Pemesan</th>
+                  <th>Layanan</th>
+                  <th>Total Harga</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTableBody">
+                <!-- Populated via script.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: CATATAN PESANAN (ORDER BOOK) -->
+      <section id="tabOrders" class="admin-tab-panel" style="display:none;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Input Catatan Pesanan Baru</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">Masukkan detail pesanan klien untuk menghitung otomatis total pendapatan.</p>
+            </div>
+          </div>
+
+          <!-- Form Input Pesanan Baru -->
+          <form id="newOrderForm">
+            <div style="display:grid;grid-template-columns:1fr;gap:1rem;" class="responsive-form-grid">
+              <div class="form-group">
+                <label for="orderCustomerName" class="form-label">Nama Pemesan / Usaha *</label>
+                <input type="text" id="orderCustomerName" class="form-input" placeholder="Contoh: Ibu Rina (Katering Barokah)" required />
+              </div>
+
+              <div class="form-group">
+                <label for="orderCustomerPhone" class="form-label">No. WhatsApp Pemesan</label>
+                <input type="text" id="orderCustomerPhone" class="form-input" placeholder="Contoh: 081298765432" />
+              </div>
+
+              <div class="form-group">
+                <label for="orderServiceSelect" class="form-label">Pilihan Layanan *</label>
+                <select id="orderServiceSelect" class="form-select" required>
+                  <!-- Populated from Services in script.js -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="orderTotalPrice" class="form-label">Total Harga (Rp) *</label>
+                <input type="number" id="orderTotalPrice" class="form-input" placeholder="Contoh: 150000" min="0" required />
+              </div>
+
+              <div class="form-group">
+                <label for="orderDate" class="form-label">Tanggal Pesanan *</label>
+                <input type="date" id="orderDate" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label for="orderStatusSelect" class="form-label">Status Pesanan *</label>
+                <select id="orderStatusSelect" class="form-select" required>
+                  <option value="Menunggu">Menunggu Konfirmasi / Desain</option>
+                  <option value="Diproses">Sedang Diproses / Dicetak</option>
+                  <option value="Selesai" selected>Selesai & Lunas</option>
+                  <option value="Dibatalkan">Dibatalkan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:0.5rem;">
+              <label for="orderNotes" class="form-label">Catatan Spesifikasi Pesanan</label>
+              <textarea id="orderNotes" class="form-textarea" placeholder="Contoh: Ukuran 5x5 cm bahan vinyl matte, cutting kiss-cut 300 pcs."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSubmitNewOrder">
+              <span>💾 Simpan Catatan Pesanan</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Daftar Pesanan Card -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Daftar Rekap Pesanan</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">Semua riwayat pesanan yang tersimpan di browser.</p>
+            </div>
+
+            <!-- Filter & Search Controls -->
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;">
+              <input type="text" id="orderSearchInput" class="form-input" placeholder="Cari nama / ID..." style="min-height:36px;font-size:0.85rem;max-width:180px;" />
+              <select id="orderStatusFilter" class="form-select" style="min-height:36px;font-size:0.85rem;max-width:140px;">
+                <option value="all">Semua Status</option>
+                <option value="Menunggu">Menunggu</option>
+                <option value="Diproses">Diproses</option>
+                <option value="Selesai">Selesai</option>
+                <option value="Dibatalkan">Dibatalkan</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Mobile Cards View (Optimized for phones) -->
+          <div class="order-cards-mobile" id="ordersMobileCards">
+            <!-- Rendered via script.js -->
+          </div>
+
+          <!-- Desktop Table View -->
+          <div class="table-responsive desktop-table-view">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Pemesan</th>
+                  <th>Layanan</th>
+                  <th>Total Harga</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Rendered via script.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: KELOLA LAYANAN & HARGA -->
+      <section id="tabServices" class="admin-tab-panel" style="display:none;">
+        <!-- Form Tambah / Edit Layanan -->
+        <div class="admin-card" id="serviceFormCard">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title" id="serviceFormTitle">Tambah Layanan Baru</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">Layanan yang diinput di sini akan langsung tampil pada katalog website utama.</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="resetDefaultServicesBtn" title="Kembalikan ke 6 layanan standar SESIKREASI">
+              <span>↺ Reset ke Default</span>
+            </button>
+          </div>
+
+          <form id="serviceForm">
+            <input type="hidden" id="serviceEditId" value="" />
+            
+            <div style="display:grid;grid-template-columns:1fr;gap:1rem;" class="responsive-form-grid">
+              <div class="form-group">
+                <label for="serviceNameInput" class="form-label">Nama Layanan *</label>
+                <input type="text" id="serviceNameInput" class="form-input" placeholder="Contoh: Cetak Kalender Dinding" required />
+              </div>
+
+              <div class="form-group">
+                <label for="servicePriceInput" class="form-label">Harga Dasar Angka (Rp) *</label>
+                <input type="number" id="servicePriceInput" class="form-input" placeholder="Contoh: 25000" min="0" required />
+              </div>
+
+              <div class="form-group">
+                <label for="servicePriceLabelInput" class="form-label">Label Tampilan Harga</label>
+                <input type="text" id="servicePriceLabelInput" class="form-input" placeholder="Contoh: Mulai Rp 25.000 / pcs" />
+              </div>
+
+              <div class="form-group">
+                <label for="serviceIconInput" class="form-label">Icon Emoji</label>
+                <input type="text" id="serviceIconInput" class="form-input" placeholder="Contoh: 📅" maxlength="4" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="serviceDescInput" class="form-label">Deskripsi Singkat Layanan *</label>
+              <textarea id="serviceDescInput" class="form-textarea" placeholder="Jelaskan secara singkat kegunaan dan keunggulan layanan ini..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="serviceFeaturesInput" class="form-label">Fitur / Keunggulan (1 baris per poin)</label>
+              <textarea id="serviceFeaturesInput" class="form-textarea" placeholder="Bahan kertas tebal 260gr&#10;Finishing jilid kawat ring&#10;Desain custom foto keluarga"></textarea>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;">
+              <button type="submit" class="btn btn-primary" id="btnSaveService">
+                <span>💾 Simpan Layanan</span>
+              </button>
+              <button type="button" class="btn btn-ghost" id="serviceCancelEditBtn" style="display:none;">
+                <span>Batal Edit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- List Layanan Aktif -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Daftar Layanan Tersimpan</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">Katalog ini langsung tersinkronisasi dengan halaman pengunjung (`index.html`).</p>
+            </div>
+          </div>
+
+          <div class="services-grid" id="adminServicesList">
+            <!-- Rendered via script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PENGATURAN STUDIO & KONTAK -->
+      <section id="tabSettings" class="admin-tab-panel" style="display:none;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Pengaturan Kontak & WhatsApp Studio</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">
+                Nomor WhatsApp yang Anda atur di sini akan otomatis terhubung ke seluruh tombol CTA di website utama dan bot obrolan.
+              </p>
+            </div>
+          </div>
+
+          <form id="studioSettingsForm">
+            <div style="display:grid;grid-template-columns:1fr;gap:1rem;" class="responsive-form-grid">
+              <div class="form-group">
+                <label for="settingStudioName" class="form-label">Nama Usaha / Studio *</label>
+                <input type="text" id="settingStudioName" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label for="settingTagline" class="form-label">Tagline Usaha</label>
+                <input type="text" id="settingTagline" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label for="settingWhatsapp" class="form-label">Nomor WhatsApp Studio (Gunakan format 62...) *</label>
+                <input type="text" id="settingWhatsapp" class="form-input" placeholder="Contoh: 6281234567890" required />
+                <small style="color:#6B7280;font-size:0.75rem;margin-top:2px;display:block;">Gunakan awalan 62 (contoh: 6281234567890 tanpa spasi atau strip).</small>
+              </div>
+
+              <div class="form-group">
+                <label for="settingEmail" class="form-label">Email Usaha</label>
+                <input type="email" id="settingEmail" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label for="settingInstagram" class="form-label">Akun Instagram</label>
+                <input type="text" id="settingInstagram" class="form-input" placeholder="@sesikreasi.studio" />
+              </div>
+
+              <div class="form-group">
+                <label for="settingTiktok" class="form-label">Akun TikTok</label>
+                <input type="text" id="settingTiktok" class="form-input" placeholder="@sesikreasi.studio" />
+              </div>
+
+              <div class="form-group">
+                <label for="settingHours" class="form-label">Jam Operasional</label>
+                <input type="text" id="settingHours" class="form-input" placeholder="Senin - Sabtu (08.00 - 20.00 WIB)" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="settingAddress" class="form-label">Alamat Lengkap Studio</label>
+              <textarea id="settingAddress" class="form-textarea" placeholder="Alamat lengkap lokasi studio percetakan Anda..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSaveSettings">
+              <span>💾 Simpan Pengaturan Studio</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Status Keamanan Akses Admin (Sandi Dikunci) -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Keamanan Akses Dashboard Admin</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">
+                Sistem keamanan akses admin dilindungi dengan kata sandi tetap untuk mencegah perubahan tidak sah atau lupa kata sandi.
+              </p>
+            </div>
+          </div>
+
+          <div style="background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: var(--radius-md); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 1.75rem; line-height: 1;">🛡️</div>
+            <div>
+              <div style="font-weight: 700; color: #5B21B6; font-size: 0.95rem;">Kata Sandi Admin Dikunci Permanen</div>
+              <div style="font-size: 0.85rem; color: #6D28D9; margin-top: 0.25rem; line-height: 1.5;">
+                Kata sandi akses aktif adalah <strong>RYU1234</strong>. Fitur ubah sandi telah dinonaktifkan demi menjamin keamanan data dan menghindari kendala lupa sandi.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backup & Restore Data -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h2 class="admin-card-title">Cadangkan & Pulihkan Data (Backup & Restore)</h2>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">
+                Simpan data pesanan dan katalog layanan ke dalam file JSON agar aman dan dapat dipindahkan ke perangkat lain.
+              </p>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+            <button type="button" class="btn btn-outline" id="exportDataBtn">
+              <span>📥 Ekspor Data (Backup JSON)</span>
+            </button>
+
+            <label class="btn btn-ghost" style="cursor:pointer;position:relative;">
+              <span>📤 Impor Data (Restore JSON)</span>
+              <input type="file" id="importDataInput" accept=".json" style="position:absolute;inset:0;opacity:0;cursor:pointer;" />
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Style helper for responsive form grid -->
+    <style>
+      @media (min-width: 640px) {
+        .responsive-form-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
+      @media (min-width: 1024px) {
+        #desktopStorageBadge {
+          display: inline-flex !important;
+        }
+      }
+    </style>
+
+    <!-- Main Logic Script -->
+    <script src="./script.js"></script>
+  </body>
+</html>

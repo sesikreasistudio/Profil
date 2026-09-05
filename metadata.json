@@ -1,0 +1,6 @@
+{
+  "name": "SESIKREASI - Studio Desain Kreatif & Cetak",
+  "description": "Website profil usaha studio desain kreatif dan percetakan SESIKREASI dengan katalog layanan, portofolio interaktif, chatbot konsultasi WhatsApp, dan dashboard admin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
