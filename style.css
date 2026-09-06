@@ -131,6 +131,11 @@ button, input, textarea, select {
   white-space: nowrap;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn * {
+  pointer-events: none;
 }
 
 .btn:active {
@@ -461,13 +466,17 @@ button, input, textarea, select {
   flex-direction: column;
   box-shadow: -6px 0 24px rgba(0, 0, 0, 0.15);
   transform: translateX(100%);
-  transition: transform var(--transition-slow);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform var(--transition-slow), visibility var(--transition-slow);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav-drawer.is-open {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer-header {
@@ -578,6 +587,8 @@ button, input, textarea, select {
 
 .hero-content {
   text-align: center;
+  position: relative;
+  z-index: 5;
 }
 
 @media (min-width: 992px) {
@@ -634,6 +645,8 @@ button, input, textarea, select {
   gap: 0.85rem;
   max-width: 380px;
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
 }
 
 @media (min-width: 640px) {
