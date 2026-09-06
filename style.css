@@ -1669,14 +1669,17 @@ button, input, textarea, select {
 
 .footer-bottom {
   padding-top: 2rem;
+  padding-bottom: 5rem;
   border-top: 1px solid #E2D1F9;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   text-align: center;
   font-size: 0.85rem;
   color: #5C4A79;
+  position: relative;
+  z-index: 10;
 }
 
 .footer-bottom strong {
@@ -1687,6 +1690,7 @@ button, input, textarea, select {
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 2rem;
   }
 }
 
@@ -1694,14 +1698,36 @@ button, input, textarea, select {
   color: #6D28D9;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-weight: 600;
-  transition: color var(--transition-fast);
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.625rem 1.25rem;
+  min-height: var(--touch-target);
+  background-color: #F5F0FF;
+  border: 1.5px solid #DDD6FE;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  position: relative;
+  z-index: 25;
+  transition: all var(--transition-fast);
 }
 
-.admin-access-link:hover {
-  color: #4C1D95;
-  text-decoration: underline;
+.admin-access-link * {
+  pointer-events: none;
+}
+
+.admin-access-link:hover, .admin-access-link:active {
+  color: #FFFFFF;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.25);
+  text-decoration: none;
 }
 
 /* ==========================================================================
