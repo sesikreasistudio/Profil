@@ -379,8 +379,22 @@ button, input, textarea, select {
   height: var(--touch-target);
   border-radius: var(--radius-sm);
   background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
   cursor: pointer;
   z-index: 60;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hamburger:hover, .hamburger:active {
+  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary-light);
+}
+
+.hamburger * {
+  pointer-events: none;
 }
 
 @media (min-width: 900px) {
@@ -417,17 +431,20 @@ button, input, textarea, select {
 .mobile-nav-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.5);
+  background-color: rgba(15, 23, 42, 0.55);
   backdrop-filter: blur(4px);
-  z-index: 55;
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity var(--transition-normal), visibility var(--transition-normal);
 }
 
 .mobile-nav-backdrop.is-open {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-nav-drawer {
@@ -435,20 +452,64 @@ button, input, textarea, select {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 82%;
+  width: 85%;
   max-width: 320px;
   background-color: var(--color-bg);
-  z-index: 56;
-  padding: 5.5rem 1.5rem 2rem 1.5rem;
+  z-index: 95;
+  padding: 1.25rem 1.25rem 2rem 1.25rem;
   display: flex;
   flex-direction: column;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.15);
   transform: translateX(100%);
   transition: transform var(--transition-slow);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav-drawer.is-open {
   transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0.75rem;
+}
+
+.mobile-drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-text-main);
+}
+
+.drawer-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: all var(--transition-fast);
+}
+
+.drawer-close-btn:hover, .drawer-close-btn:active {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-color: var(--color-primary-light);
 }
 
 .mobile-nav-list {
