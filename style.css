@@ -2931,5 +2931,26 @@ button, input, textarea, select {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+/* --- Perbaikan Menu Mobile --- */
+aside[aria-label="Menu Mobile"] {
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+/* Memastikan overlay tidak memblokir tombol saat tertutup */
+div[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+div[aria-hidden="true"].active,
+aside[aria-label="Menu Mobile"].active {
+  pointer-events: auto;
+}
+
+aside[aria-label="Menu Mobile"] a {
+  position: relative;
+  z-index: 100000;
+  pointer-events: auto !important;
+}
 
 
