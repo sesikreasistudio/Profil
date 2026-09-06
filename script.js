@@ -468,12 +468,13 @@ function initFrontend() {
     });
   }
 
-  // Ensure clicking any admin link always resets auth session so password prompt is displayed
-  document.querySelectorAll('a[href*="admin.html"]').forEach((link) => {
-    link.addEventListener('click', () => {
+  // Ensure clicking any admin link always resets auth session and navigates directly
+  document.querySelectorAll('a[href*="admin.html"], .admin-access-link').forEach((link) => {
+    link.addEventListener('click', (e) => {
       try {
         sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH_TOKEN);
-      } catch (e) {}
+      } catch (err) {}
+      window.location.assign('admin.html');
     });
   });
 }
@@ -1942,12 +1943,13 @@ Mohon konfirmasi ketersediaan bahan, estimasi waktu pengerjaan, dan panduan pemb
   // 4. Mobile Navigation Setup
   setupMobileNav();
 
-  // 5. Ensure clicking any admin link resets auth session
-  document.querySelectorAll('a[href*="admin.html"]').forEach((link) => {
-    link.addEventListener('click', () => {
+  // 5. Ensure clicking any admin link resets auth session and navigates directly
+  document.querySelectorAll('a[href*="admin.html"], .admin-access-link').forEach((link) => {
+    link.addEventListener('click', (e) => {
       try {
         sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH_TOKEN);
-      } catch (e) {}
+      } catch (err) {}
+      window.location.assign('admin.html');
     });
   });
 
