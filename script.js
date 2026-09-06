@@ -371,6 +371,22 @@ function getCleanWhatsAppUrl(phone, message = '') {
   return `https://wa.me/${cleaned}?text=${encodedMsg}`;
 }
 
+function openWhatsAppSafe(url) {
+  try {
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    if (isMobile) {
+      window.location.href = url;
+    } else {
+      const win = window.open(url, '_blank');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = url;
+      }
+    }
+  } catch (err) {
+    window.location.href = url;
+  }
+}
+
 function showToast(message, type = 'success') {
   let container = document.getElementById('toastContainer');
   if (!container) {
@@ -454,10 +470,17 @@ function initFrontend() {
   // Tombol "Layanan & Harga" pada Hero Banner -> Masuk langsung ke layanan.html
   const heroServicesBtn = document.getElementById('heroServicesBtn');
   if (heroServicesBtn) {
-    heroServicesBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.assign('layanan.html');
+    const navigateToLayanan = () => {
+      window.location.href = 'layanan.html';
+    };
+
+    heroServicesBtn.addEventListener('click', () => {
+      navigateToLayanan();
     });
+
+    heroServicesBtn.addEventListener('touchend', () => {
+      navigateToLayanan();
+    }, { passive: true });
   }
 
   // Ensure clicking any admin link always resets auth session and navigates directly
@@ -589,17 +612,29 @@ function openLightbox(item) {
   const orderBtn = document.getElementById('lightboxOrderBtn');
   if (!modal) return;
 
-  img.src = item.imgUrl;
-  img.alt = item.title;
-  title.textContent = item.title;
-  category.textContent = item.categoryLabel;
-  desc.textContent = item.desc;
+  if (img) {
+    img.src = item.imgUrl;
+    img.alt = item.title;
+  }
+  if (title) title.textContent = item.title;
+  if (category) category.textContent = item.categoryLabel;
+  if (desc) desc.textContent = item.desc;
 
   const settings = getSettings();
   const waMsg = `Halo SESIKREASI, saya tertarik memesan produk seperti di portofolio: *${item.title}*. Bisa dibantu?`;
-  orderBtn.href = getCleanWhatsAppUrl(settings.whatsappNumber, waMsg);
+  const waUrl = getCleanWhatsAppUrl(settings.whatsappNumber, waMsg);
+  if (orderBtn) {
+    orderBtn.href = waUrl;
+    orderBtn.onclick = (e) => {
+      e.preventDefault();
+      openWhatsAppSafe(waUrl);
+    };
+  }
 
-  modal.classList.add('is-open');
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => {
+    modal.classList.add('is-open');
+  });
   document.body.style.overflow = 'hidden';
 }
 
@@ -607,6 +642,11 @@ function closeLightbox() {
   const modal = document.getElementById('lightboxModal');
   if (modal) {
     modal.classList.remove('is-open');
+    setTimeout(() => {
+      if (!modal.classList.contains('is-open')) {
+        modal.style.display = 'none';
+      }
+    }, 250);
     document.body.style.overflow = '';
   }
 }
@@ -626,18 +666,31 @@ function setupMobileNav() {
     hamburger.classList.remove('is-active');
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!drawer.classList.contains('is-open')) {
+        drawer.style.display = 'none';
+        backdrop.style.display = 'none';
+      }
+    }, 300);
   }
 
   function openNav() {
-    drawer.classList.add('is-open');
-    backdrop.classList.add('is-open');
-    hamburger.classList.add('is-active');
-    hamburger.setAttribute('aria-expanded', 'true');
+    drawer.style.display = 'flex';
+    backdrop.style.display = 'block';
+    requestAnimationFrame(() => {
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      hamburger.classList.add('is-active');
+      hamburger.setAttribute('aria-expanded', 'true');
+    });
     document.body.style.overflow = 'hidden';
   }
 
   function toggleNav(e) {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const isOpen = drawer.classList.contains('is-open');
     if (isOpen) {
       closeNav();
@@ -646,7 +699,6 @@ function setupMobileNav() {
     }
   }
 
-  // Bind click & touchstart to avoid touch delay on mobile devices
   hamburger.addEventListener('click', toggleNav);
   backdrop.addEventListener('click', closeNav);
   if (closeBtn) {
@@ -672,7 +724,7 @@ function setupMobileNav() {
               top: Math.max(0, elementTop - headerHeight),
               behavior: 'smooth',
             });
-          }, 120);
+          }, 150);
         }
       }
     });
@@ -701,11 +753,17 @@ function setupContactForm(settings) {
     const service = document.getElementById('contactService')?.value;
     const notes = document.getElementById('contactNotes')?.value.trim();
 
-    const msg = `Halo SESIKREASI, saya *${name}*.\nSaya ingin memesan / konsultasi layanan: *${service}*.\n\nDetail Pesanan:\n${notes}`;
+    if (!name) {
+      showToast('Mohon masukkan nama Anda', 'error');
+      document.getElementById('contactName')?.focus();
+      return;
+    }
+
+    const msg = `Halo SESIKREASI, saya *${name}*.\nSaya ingin memesan / konsultasi layanan: *${service}*.\n\nDetail Pesanan:\n${notes || '-'}`;
     const waUrl = getCleanWhatsAppUrl(settings.whatsappNumber, msg);
 
     showToast('Membuka WhatsApp SESIKREASI...', 'success');
-    window.open(waUrl, '_blank');
+    openWhatsAppSafe(waUrl);
     form.reset();
   });
 }
@@ -729,13 +787,21 @@ function setupChatbot(settings, services) {
     const isOpen = box.classList.contains('is-open');
     if (isOpen) {
       box.classList.remove('is-open');
+      setTimeout(() => {
+        if (!box.classList.contains('is-open')) {
+          box.style.display = 'none';
+        }
+      }, 250);
     } else {
-      box.classList.add('is-open');
-      if (!hasGreeted) {
-        triggerGreeting();
-        hasGreeted = true;
-      }
-      setTimeout(() => chatInput?.focus(), 250);
+      box.style.display = 'flex';
+      requestAnimationFrame(() => {
+        box.classList.add('is-open');
+        if (!hasGreeted) {
+          triggerGreeting();
+          hasGreeted = true;
+        }
+        setTimeout(() => chatInput?.focus(), 250);
+      });
     }
   }
 
@@ -1910,6 +1976,14 @@ function initLayananPage() {
     // Initial update
     updateEstimator();
 
+    const estForm = document.getElementById('priceEstimatorForm');
+    if (estForm) {
+      estForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (btnSendEstimate) btnSendEstimate.click();
+      });
+    }
+
     if (btnSendEstimate) {
       btnSendEstimate.addEventListener('click', () => {
         const selectedId = estimatorSelect.value;
@@ -1927,7 +2001,7 @@ function initLayananPage() {
 Mohon konfirmasi ketersediaan bahan, estimasi waktu pengerjaan, dan panduan pembayarannya. Terima kasih!`;
 
         const waUrl = getCleanWhatsAppUrl(settings.whatsappNumber, message);
-        window.open(waUrl, '_blank');
+        openWhatsAppSafe(waUrl);
       });
     }
   }
