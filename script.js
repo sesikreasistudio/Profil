@@ -26,7 +26,7 @@ const DEFAULT_SETTINGS = {
   studioName: 'SESIKREASI',
   tagline: 'Studio Desain Kreatif & Cetak Berkualitas',
   whatsappNumber: '6287719613858',
-  address: 'Sumberejo, Sawo, Kec. Kutorejo, Kabupaten Mojokerto',
+  address: 'Ds. Sawo, Kec. Kutorejo, Kabupaten Mojokerto',
   openingHours: 'Senin - Sabtu (08.00 - 20.00 WIB)',
   email: 'sesikreasi@gmail.com',
   instagram: '@sesikreasi.studio',
