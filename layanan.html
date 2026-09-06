@@ -59,14 +59,23 @@
     <!-- Mobile Drawer & Backdrop -->
     <div class="mobile-nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
     <aside class="mobile-nav-drawer" id="mobileDrawer" aria-label="Menu Mobile Layanan">
-      <div style="padding: 1.25rem 1.5rem 0.5rem; border-bottom: 1px solid var(--color-border);">
-        <span class="badge badge-purple">📋 Halaman Khusus Layanan</span>
+      <div class="mobile-drawer-header">
+        <div class="mobile-drawer-brand">
+          <span class="logo-symbol">S</span>
+          <span class="brand-text">SESIKREASI</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Tutup Menu">
+          ✕
+        </button>
+      </div>
+      <div style="padding: 0.5rem 0.5rem 0.75rem; border-bottom: 1px solid var(--color-border); margin-bottom: 0.5rem;">
+        <span class="badge badge-purple" style="font-size:0.75rem;">📋 Halaman Khusus Layanan</span>
       </div>
       <ul class="mobile-nav-list">
-        <li><a href="#katalog" class="mobile-nav-link active"><span>Katalog & Daftar Harga</span> <span>→</span></a></li>
-        <li><a href="#kalkulator" class="mobile-nav-link"><span>Kalkulator Estimasi</span> <span>→</span></a></li>
-        <li><a href="#cara-order" class="mobile-nav-link"><span>Cara Pemesanan</span> <span>→</span></a></li>
-        <li><a href="index.html" class="mobile-nav-link"><span>← Kembali ke Profil Studio</span> <span>🏠</span></a></li>
+        <li><a href="#katalog" class="mobile-nav-link active"><span>🏷️ Katalog & Daftar Harga</span> <span>→</span></a></li>
+        <li><a href="#kalkulator" class="mobile-nav-link"><span>🧮 Kalkulator Estimasi</span> <span>→</span></a></li>
+        <li><a href="#cara-order" class="mobile-nav-link"><span>📦 Cara Pemesanan</span> <span>→</span></a></li>
+        <li><a href="index.html" class="mobile-nav-link" style="color:var(--color-primary);font-weight:700;"><span>← Kembali ke Profil Studio</span> <span>🏠</span></a></li>
       </ul>
       <div class="mobile-nav-footer">
         <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block dynamic-wa-link" id="mobileDrawerWaBtn">
