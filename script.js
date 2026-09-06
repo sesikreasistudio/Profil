@@ -459,11 +459,12 @@ function initFrontend() {
   // Contact Form Setup
   setupContactForm(settings);
 
-  // Ensure hero services button navigation works reliably on all mobile browsers & devices
+  // Tombol "Layanan & Harga" pada Hero Banner -> Masuk langsung ke layanan.html
   const heroServicesBtn = document.getElementById('heroServicesBtn');
   if (heroServicesBtn) {
     heroServicesBtn.addEventListener('click', (e) => {
-      window.location.href = 'layanan.html';
+      e.preventDefault();
+      window.location.assign('layanan.html');
     });
   }
 
