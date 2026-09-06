@@ -2931,6 +2931,7 @@ button, input, textarea, select {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+
 /* --- Perbaikan Menu Mobile --- */
 aside[aria-label="Menu Mobile"] {
   z-index: 99999 !important;
@@ -2951,6 +2952,26 @@ aside[aria-label="Menu Mobile"] a {
   position: relative;
   z-index: 100000;
   pointer-events: auto !important;
+}
+
+/* --- Perbaikan Navbar Mobile & Header Overlap --- */
+@media (max-width: 768px) {
+  /* Sembunyikan tombol Konsultasi WA di header khusus layar HP agar tidak menutupi tombol hamburger */
+  nav div a[href*="wa.me"] {
+    display: none !important;
+  }
+  
+  /* Pastikan header berada di atas dan tidak memblokir tombol di bawahnya secara tidak sengaja */
+  header {
+    z-index: 9999 !important;
+  }
+
+  /* Pastikan tombol "Lihat Layanan Kami" di Hero Section bisa diklik */
+  a[href="layanan.html"] {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto !important;
+  }
 }
 
 
