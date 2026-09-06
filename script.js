@@ -303,12 +303,15 @@ function getServices() {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        // Auto-merge srv-6 if missing from previous sessions
-        if (!parsed.some((s) => s.id === 'srv-6')) {
-          const srv6 = DEFAULT_SERVICES.find((s) => s.id === 'srv-6');
-          if (srv6) {
-            parsed.push(srv6);
-            localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(parsed));
+        // One-time initial migration check for legacy stores
+        if (!localStorage.getItem('sesikreasi_srv6_migrated')) {
+          localStorage.setItem('sesikreasi_srv6_migrated', 'true');
+          if (!parsed.some((s) => s.id === 'srv-6')) {
+            const srv6 = DEFAULT_SERVICES.find((s) => s.id === 'srv-6');
+            if (srv6) {
+              parsed.push(srv6);
+              localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(parsed));
+            }
           }
         }
         return parsed;
@@ -1160,6 +1163,15 @@ function initAdmin() {
   }
 
   // SERVICES MANAGEMENT
+  const categoryLabels = {
+    desain: '🎨 Jasa Desain',
+    undangan: '💌 Cetak Undangan',
+    print: '🖨️ Print Dokumen',
+    stiker: '🏷️ Label Stiker',
+    foto: '🖼️ Cetak Foto',
+    custom: '📦 Cetak Custom',
+  };
+
   function refreshServicesList() {
     const list = getServices();
     const container = document.getElementById('adminServicesList');
@@ -1167,24 +1179,41 @@ function initAdmin() {
 
     container.innerHTML = '';
     if (list.length === 0) {
-      container.innerHTML = `<p style="color:#9CA3AF;text-align:center;padding:1.5rem;">Belum ada layanan tersimpan.</p>`;
+      container.innerHTML = `<p style="color:#9CA3AF;text-align:center;padding:1.5rem;grid-column:1/-1;">Belum ada layanan tersimpan. Silakan tambahkan layanan baru di formulir atas.</p>`;
       return;
     }
 
-    list.forEach((service, index) => {
+    list.forEach((service) => {
       const item = document.createElement('div');
       item.className = 'service-card';
       item.style.padding = '1.25rem';
+      item.style.display = 'flex';
+      item.style.flexDirection = 'column';
+
+      const catText = categoryLabels[service.category] || service.category || '🎨 Layanan';
+      const featuresPreview = (service.features || [])
+        .map((f) => `<li style="font-size:0.8rem;color:#4B5563;display:flex;gap:5px;align-items:flex-start;margin-bottom:3px;"><span style="color:#7C3AED;font-weight:700;">✓</span><span>${f}</span></li>`)
+        .join('');
+
       item.innerHTML = `
         <div class="service-card-header" style="margin-bottom:0.75rem;">
           <div class="service-icon-box" style="width:42px;height:42px;font-size:1.3rem;">${service.icon || '✨'}</div>
-          <span class="badge badge-purple">${service.priceLabel || formatRupiah(service.price)}</span>
+          <div style="text-align:right;">
+            <span class="badge badge-purple" style="font-weight:700;">${service.priceLabel || formatRupiah(service.price)}</span>
+            <div style="font-size:0.72rem;color:#6B7280;margin-top:2px;">Dasar: ${formatRupiah(service.price)}</div>
+          </div>
         </div>
-        <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.35rem;">${service.name}</h4>
-        <p style="font-size:0.85rem;color:#4B5563;margin-bottom:0.85rem;line-height:1.4;">${service.desc}</p>
+        <div style="margin-bottom:0.35rem;">
+          <span class="badge" style="background:#F3F4F6;color:#374151;font-size:0.75rem;">${catText}</span>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.35rem;color:#111827;">${service.name}</h4>
+        <p style="font-size:0.85rem;color:#4B5563;margin-bottom:0.75rem;line-height:1.4;">${service.desc}</p>
+        
+        ${featuresPreview ? `<ul style="list-style:none;padding:0;margin:0 0 1rem 0;border-top:1px dashed #E5E7EB;padding-top:0.6rem;">${featuresPreview}</ul>` : ''}
+
         <div style="margin-top:auto;display:flex;gap:0.5rem;">
-          <button type="button" class="btn btn-ghost btn-sm btn-block edit-service-btn" data-id="${service.id}">Edit</button>
-          <button type="button" class="btn btn-outline btn-sm delete-service-btn" data-id="${service.id}" style="color:#EF4444;border-color:#EF4444;">Hapus</button>
+          <button type="button" class="btn btn-ghost btn-sm btn-block edit-service-btn" data-id="${service.id}">✏️ Edit</button>
+          <button type="button" class="btn btn-outline btn-sm delete-service-btn" data-id="${service.id}" style="color:#EF4444;border-color:#EF4444;">🗑️ Hapus</button>
         </div>
       `;
 
@@ -1195,14 +1224,16 @@ function initAdmin() {
     container.querySelectorAll('.delete-service-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
-        if (confirm('Yakin ingin menghapus layanan ini?')) {
+        const s = getServices().find((item) => item.id === id);
+        const sName = s ? s.name : 'layanan';
+        if (confirm(`Yakin ingin menghapus layanan "${sName}"?\nLayanan ini akan otomatis terhapus dari Halaman Layanan & Harga.`)) {
           const current = getServices();
-          const updated = current.filter((s) => s.id !== id);
+          const updated = current.filter((item) => item.id !== id);
           saveServices(updated);
           refreshServicesList();
           refreshOverview();
           populateServiceOptions();
-          showToast('Layanan berhasil dihapus', 'success');
+          showToast(`Layanan "${sName}" berhasil dihapus`, 'success');
         }
       });
     });
@@ -1215,14 +1246,23 @@ function initAdmin() {
 
         document.getElementById('serviceEditId').value = s.id;
         document.getElementById('serviceNameInput').value = s.name;
+        
+        const catSelect = document.getElementById('serviceCategorySelect');
+        if (catSelect) catSelect.value = s.category || 'desain';
+
         document.getElementById('servicePriceInput').value = s.price;
-        document.getElementById('servicePriceLabelInput').value = s.priceLabel;
-        document.getElementById('serviceIconInput').value = s.icon;
-        document.getElementById('serviceDescInput').value = s.desc;
+        document.getElementById('servicePriceLabelInput').value = s.priceLabel || '';
+        document.getElementById('serviceIconInput').value = s.icon || '';
+        document.getElementById('serviceDescInput').value = s.desc || '';
         document.getElementById('serviceFeaturesInput').value = (s.features || []).join('\n');
 
-        document.getElementById('serviceFormTitle').textContent = 'Edit Layanan';
-        document.getElementById('serviceCancelEditBtn').style.display = 'inline-flex';
+        document.getElementById('serviceFormTitle').textContent = `Edit Layanan: ${s.name}`;
+        const saveBtn = document.getElementById('btnSaveService');
+        if (saveBtn) saveBtn.innerHTML = '<span>💾 Simpan Perubahan Layanan</span>';
+        
+        const cancelBtn = document.getElementById('serviceCancelEditBtn');
+        if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+
         document.getElementById('serviceFormCard')?.scrollIntoView({ behavior: 'smooth' });
       });
     });
@@ -1235,6 +1275,7 @@ function initAdmin() {
       e.preventDefault();
       const editId = document.getElementById('serviceEditId').value;
       const name = document.getElementById('serviceNameInput').value.trim();
+      const category = document.getElementById('serviceCategorySelect')?.value || 'desain';
       const price = Number(document.getElementById('servicePriceInput').value) || 0;
       const priceLabel = document.getElementById('servicePriceLabelInput').value.trim() || formatRupiah(price);
       const icon = document.getElementById('serviceIconInput').value.trim() || '✨';
@@ -1248,17 +1289,17 @@ function initAdmin() {
         // Update existing
         current = current.map((s) => {
           if (s.id === editId) {
-            return { ...s, name, price, priceLabel, icon, desc, features };
+            return { ...s, name, category, price, priceLabel, icon, desc, features };
           }
           return s;
         });
-        showToast('Layanan berhasil diperbarui', 'success');
+        showToast(`Layanan "${name}" berhasil diperbarui!`, 'success');
       } else {
         // Add new
         const newService = {
           id: 'srv-' + Date.now(),
           name,
-          category: 'desain',
+          category,
           price,
           priceLabel,
           icon,
@@ -1266,7 +1307,7 @@ function initAdmin() {
           features,
         };
         current.push(newService);
-        showToast('Layanan baru berhasil ditambahkan', 'success');
+        showToast(`Layanan baru "${name}" berhasil ditambahkan!`, 'success');
       }
 
       saveServices(current);
@@ -1283,9 +1324,15 @@ function initAdmin() {
   }
 
   function resetServiceForm() {
-    serviceForm.reset();
-    document.getElementById('serviceEditId').value = '';
-    document.getElementById('serviceFormTitle').textContent = 'Tambah Layanan Baru';
+    if (serviceForm) serviceForm.reset();
+    const editIdInput = document.getElementById('serviceEditId');
+    if (editIdInput) editIdInput.value = '';
+    const formTitle = document.getElementById('serviceFormTitle');
+    if (formTitle) formTitle.textContent = 'Tambah Layanan Baru';
+    const catSelect = document.getElementById('serviceCategorySelect');
+    if (catSelect) catSelect.value = 'desain';
+    const saveBtn = document.getElementById('btnSaveService');
+    if (saveBtn) saveBtn.innerHTML = '<span>💾 Simpan Layanan</span>';
     if (cancelServiceEditBtn) cancelServiceEditBtn.style.display = 'none';
   }
 
@@ -1605,14 +1652,345 @@ function initAdmin() {
 }
 
 // ==========================================================================
-// 6. DOMCONTENTLOADED DISPATCHER
+// 6. DEDICATED LAYANAN & HARGA PAGE LOGIC (layanan.html)
+// ==========================================================================
+function initLayananPage() {
+  let settings = getSettings();
+  let services = getServices();
+
+  function updateLayananContacts(currentSettings) {
+    const waNumberClean = currentSettings.whatsappNumber || '6281234567890';
+    const defaultWaMsg = 'Halo SESIKREASI, saya ingin konsultasi layanan dan rincian harga.';
+    const defaultWaUrl = getCleanWhatsAppUrl(waNumberClean, defaultWaMsg);
+
+    // Update elements with class .dynamic-wa-link
+    document.querySelectorAll('.dynamic-wa-link').forEach((link) => {
+      link.href = defaultWaUrl;
+    });
+
+    // Update WhatsApp displays
+    const quickWaNumber = document.getElementById('quickWaNumber');
+    if (quickWaNumber) quickWaNumber.textContent = `+${waNumberClean}`;
+    const footerWaVal = document.getElementById('footerWaVal');
+    if (footerWaVal) footerWaVal.textContent = `+${waNumberClean}`;
+
+    // Update Studio Name & Address
+    const brandName = currentSettings.studioName || 'SESIKREASI';
+    document.querySelectorAll('.brand-name-dynamic').forEach((el) => {
+      el.textContent = brandName;
+    });
+
+    // Update Instagram & TikTok links
+    const igHandleText = currentSettings.instagram || '@sesikreasi.studio';
+    const igUsername = igHandleText.replace(/^@/, '').trim();
+    const igUrl = `https://instagram.com/${igUsername}`;
+
+    const footerIgLink = document.getElementById('footerIgLink');
+    if (footerIgLink) footerIgLink.href = igUrl;
+    const footerIgVal = document.getElementById('footerIgVal');
+    if (footerIgVal) footerIgVal.textContent = igHandleText;
+
+    const tiktokHandleText = currentSettings.tiktok || '@sesikreasi.studio';
+    const tiktokUsername = tiktokHandleText.replace(/^@/, '').trim();
+    const tiktokUrl = `https://tiktok.com/@${tiktokUsername}`;
+
+    const footerTiktokLink = document.getElementById('footerTiktokLink');
+    if (footerTiktokLink) footerTiktokLink.href = tiktokUrl;
+    const footerTiktokVal = document.getElementById('footerTiktokVal');
+    if (footerTiktokVal) footerTiktokVal.textContent = tiktokHandleText;
+  }
+
+  // Initial contacts update
+  updateLayananContacts(settings);
+  const channelWaHandle = document.getElementById('channelWaHandle');
+  if (channelWaHandle) channelWaHandle.textContent = `+${waNumberClean}`;
+
+  // Update Instagram
+  if (settings.instagram) {
+    const rawIg = settings.instagram.replace(/^@/, '').trim();
+    const igUrl = `https://instagram.com/${rawIg}`;
+    const igHandleText = `@${rawIg}`;
+
+    const heroQuickIg = document.getElementById('heroQuickIg');
+    if (heroQuickIg) heroQuickIg.href = igUrl;
+    const quickIgHandle = document.getElementById('quickIgHandle');
+    if (quickIgHandle) quickIgHandle.textContent = igHandleText;
+
+    const btnChannelIg = document.getElementById('btnChannelIg');
+    if (btnChannelIg) btnChannelIg.href = igUrl;
+    const channelIgHandle = document.getElementById('channelIgHandle');
+    if (channelIgHandle) channelIgHandle.textContent = igHandleText;
+
+    const footerIgLink = document.getElementById('footerIgLink');
+    if (footerIgLink) footerIgLink.href = igUrl;
+    const footerIgVal = document.getElementById('footerIgVal');
+    if (footerIgVal) footerIgVal.textContent = igHandleText;
+  }
+
+  // Update TikTok
+  if (settings.tiktok) {
+    const rawTiktok = settings.tiktok.replace(/^@/, '').trim();
+    const tiktokUrl = `https://tiktok.com/@${rawTiktok}`;
+    const tiktokHandleText = `@${rawTiktok}`;
+
+    const heroQuickTiktok = document.getElementById('heroQuickTiktok');
+    if (heroQuickTiktok) heroQuickTiktok.href = tiktokUrl;
+    const quickTiktokHandle = document.getElementById('quickTiktokHandle');
+    if (quickTiktokHandle) quickTiktokHandle.textContent = tiktokHandleText;
+
+    const btnChannelTiktok = document.getElementById('btnChannelTiktok');
+    if (btnChannelTiktok) btnChannelTiktok.href = tiktokUrl;
+    const channelTiktokHandle = document.getElementById('channelTiktokHandle');
+    if (channelTiktokHandle) channelTiktokHandle.textContent = tiktokHandleText;
+
+    const footerTiktokLink = document.getElementById('footerTiktokLink');
+    if (footerTiktokLink) footerTiktokLink.href = tiktokUrl;
+    const footerTiktokVal = document.getElementById('footerTiktokVal');
+    if (footerTiktokVal) footerTiktokVal.textContent = tiktokHandleText;
+  }
+
+  // 2. Services Rendering, Filtering & Search
+  const container = document.getElementById('layananServicesContainer');
+  const noResultBox = document.getElementById('noServiceFound');
+  const searchInput = document.getElementById('serviceSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const categoryPills = document.querySelectorAll('.cat-pill');
+
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  function renderFilteredServices() {
+    if (!container) return;
+
+    const filtered = services.filter((srv) => {
+      const matchCat = currentCategory === 'all' || srv.category === currentCategory;
+      if (!matchCat) return false;
+
+      if (!searchQuery) return true;
+      const query = searchQuery.toLowerCase();
+      const matchName = srv.name.toLowerCase().includes(query);
+      const matchDesc = srv.desc.toLowerCase().includes(query);
+      const matchFeatures = (srv.features || []).some((f) => f.toLowerCase().includes(query));
+      return matchName || matchDesc || matchFeatures;
+    });
+
+    container.innerHTML = '';
+
+    if (filtered.length === 0) {
+      if (noResultBox) noResultBox.style.display = 'block';
+    } else {
+      if (noResultBox) noResultBox.style.display = 'none';
+
+      filtered.forEach((srv) => {
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.id = `layanan-${srv.id}`;
+
+        const featuresHtml = (srv.features || [])
+          .map(
+            (f) => `
+            <li class="service-feature-item">
+              <span class="service-feature-check">✓</span>
+              <span>${f}</span>
+            </li>
+          `
+          )
+          .join('');
+
+        const waOrderMsg = `Halo SESIKREASI, saya ingin pesan layanan *${srv.name}* (estimasi ${srv.priceLabel || formatRupiah(srv.price)}). Mohon dibantu rincian proses dan pembayarannya.`;
+        const waOrderUrl = getCleanWhatsAppUrl(settings.whatsappNumber, waOrderMsg);
+
+        card.innerHTML = `
+          <div class="service-card-header">
+            <div class="service-icon-box" aria-hidden="true">${srv.icon || '✨'}</div>
+            <div class="service-price-tag">
+              <span class="price-prefix">Harga Mulai</span>
+              <span class="price-value">${srv.priceLabel || formatRupiah(srv.price)}</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 0.5rem;">
+            <span class="badge badge-purple" style="font-size:0.74rem; text-transform:uppercase;">${srv.category || 'Layanan'}</span>
+          </div>
+          <h3 class="service-card-title">${srv.name}</h3>
+          <p class="service-card-desc">${srv.desc}</p>
+          <ul class="service-features-list">
+            ${featuresHtml}
+          </ul>
+          <a href="${waOrderUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block" style="margin-top:auto;" id="order-${srv.id}">
+            <span>💬 Pesan via WhatsApp</span>
+          </a>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+  }
+
+  // Initial render
+  renderFilteredServices();
+
+  // Category filter click handlers
+  categoryPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      categoryPills.forEach((p) => {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
+      currentCategory = pill.getAttribute('data-cat') || 'all';
+      renderFilteredServices();
+    });
+  });
+
+  // Search input handler
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = searchQuery ? 'flex' : 'none';
+      }
+      renderFilteredServices();
+    });
+  }
+
+  // Clear search button
+  if (clearSearchBtn && searchInput) {
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      clearSearchBtn.style.display = 'none';
+      searchInput.focus();
+      renderFilteredServices();
+    });
+  }
+
+  // 3. Interactive Price Estimator
+  const estimatorSelect = document.getElementById('estimatorServiceSelect');
+  const estimatorQty = document.getElementById('estimatorQuantity');
+  const estimatorUnitLabel = document.getElementById('estimatorUnitLabel');
+  const estimatorNotes = document.getElementById('estimatorNotes');
+  const estimatorTotal = document.getElementById('estimatorTotalPrice');
+  const btnSendEstimate = document.getElementById('btnSendEstimatedOrder');
+
+  if (estimatorSelect) {
+    estimatorSelect.innerHTML = services
+      .map((s) => `<option value="${s.id}">${s.icon || '✨'} ${s.name} (${s.priceLabel || formatRupiah(s.price)})</option>`)
+      .join('');
+
+    function updateEstimator() {
+      const selectedId = estimatorSelect.value;
+      const selectedService = services.find((s) => s.id === selectedId) || services[0];
+      const qty = parseInt(estimatorQty?.value || '1', 10) || 1;
+
+      if (estimatorUnitLabel && selectedService) {
+        switch (selectedService.category) {
+          case 'undangan':
+            estimatorUnitLabel.textContent = 'Satuan: pcs / lembar undangan';
+            break;
+          case 'print':
+            estimatorUnitLabel.textContent = 'Satuan: lembar / jilid buku';
+            break;
+          case 'stiker':
+            estimatorUnitLabel.textContent = 'Satuan: lembar A3+ / pcs stiker';
+            break;
+          case 'desain':
+            estimatorUnitLabel.textContent = 'Satuan: paket / konsep desain';
+            break;
+          case 'foto':
+            estimatorUnitLabel.textContent = 'Satuan: lembar cetak foto / bingkai';
+            break;
+          case 'custom':
+            estimatorUnitLabel.textContent = 'Satuan: buku nota / pcs custom';
+            break;
+          default:
+            estimatorUnitLabel.textContent = 'Satuan: pcs / unit';
+        }
+      }
+
+      if (selectedService && estimatorTotal) {
+        const estTotal = (selectedService.price || 0) * qty;
+        estimatorTotal.textContent = formatRupiah(estTotal);
+      }
+    }
+
+    estimatorSelect.addEventListener('change', updateEstimator);
+    if (estimatorQty) {
+      estimatorQty.addEventListener('input', updateEstimator);
+    }
+
+    // Initial update
+    updateEstimator();
+
+    if (btnSendEstimate) {
+      btnSendEstimate.addEventListener('click', () => {
+        const selectedId = estimatorSelect.value;
+        const selectedService = services.find((s) => s.id === selectedId) || services[0];
+        const qty = parseInt(estimatorQty?.value || '1', 10) || 1;
+        const notes = estimatorNotes?.value.trim() || '-';
+        const estTotal = (selectedService.price || 0) * qty;
+
+        const message = `Halo SESIKREASI, saya ingin order berdasarkan estimasi di website:
+• Layanan: *${selectedService.name}*
+• Jumlah: ${qty}
+• Catatan Spesifikasi: ${notes}
+• Perkiraan Biaya: *${formatRupiah(estTotal)}*
+
+Mohon konfirmasi ketersediaan bahan, estimasi waktu pengerjaan, dan panduan pembayarannya. Terima kasih!`;
+
+        const waUrl = getCleanWhatsAppUrl(settings.whatsappNumber, message);
+        window.open(waUrl, '_blank');
+      });
+    }
+  }
+
+  // 4. Mobile Navigation Setup
+  setupMobileNav();
+
+  // 5. Ensure clicking any admin link resets auth session
+  document.querySelectorAll('a[href*="admin.html"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      try {
+        sessionStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH_TOKEN);
+      } catch (e) {}
+    });
+  });
+
+  // 6. Real-time synchronization when services or settings are updated in Admin Dashboard
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEYS.SERVICES) {
+      services = getServices();
+      renderFilteredServices();
+      if (estimatorSelect) {
+        const prevSelectedId = estimatorSelect.value;
+        estimatorSelect.innerHTML = services
+          .map((s) => `<option value="${s.id}">${s.icon || '✨'} ${s.name} (${s.priceLabel || formatRupiah(s.price)})</option>`)
+          .join('');
+        if (services.some((s) => s.id === prevSelectedId)) {
+          estimatorSelect.value = prevSelectedId;
+        }
+        updateEstimator();
+      }
+    }
+    if (e.key === STORAGE_KEYS.SETTINGS) {
+      settings = getSettings();
+      updateLayananContacts(settings);
+    }
+  });
+}
+
+// ==========================================================================
+// 7. DOMCONTENTLOADED DISPATCHER
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if current page is admin.html or index.html
+  // Check if current page is admin.html, layanan.html, or index.html
   const isAdminPage = document.getElementById('adminApp') !== null;
+  const isLayananPage = document.getElementById('layananApp') !== null;
 
   if (isAdminPage) {
     initAdmin();
+  } else if (isLayananPage) {
+    initLayananPage();
   } else {
     initFrontend();
 
