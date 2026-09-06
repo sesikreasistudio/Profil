@@ -26,11 +26,14 @@
 
           <div style="display:flex;align-items:center;gap:0.75rem;" id="adminNavActions">
             <span class="badge badge-purple" style="display:none;" id="desktopStorageBadge">LocalStorage Active</span>
+            <a href="layanan.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="btnAdminToLayanan">
+              <span>📋 Buka Layanan & Harga ↗</span>
+            </a>
             <button type="button" class="btn btn-ghost btn-sm" id="btnAdminLogout" style="display:none;color:#DC2626;border-color:#FCA5A5;" title="Kunci & Keluar dari Dashboard">
               <span>🔒 Kunci / Keluar</span>
             </button>
             <a href="index.html" class="btn btn-outline btn-sm" id="btnBackToWebsite">
-              <span>← Ke Website Utama</span>
+              <span>← Profil Studio</span>
             </a>
           </div>
         </div>
@@ -301,52 +304,74 @@
       <section id="tabServices" class="admin-tab-panel" style="display:none;">
         <!-- Form Tambah / Edit Layanan -->
         <div class="admin-card" id="serviceFormCard">
-          <div class="admin-card-header">
+          <div class="admin-card-header" style="flex-wrap:wrap;gap:0.75rem;">
             <div>
               <h2 class="admin-card-title" id="serviceFormTitle">Tambah Layanan Baru</h2>
-              <p style="font-size:0.85rem;color:var(--color-text-muted);">Layanan yang diinput di sini akan langsung tampil pada katalog website utama.</p>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">
+                Semua perubahan informasi, harga, dan layanan yang disimpan di sini akan langsung tampil pada <strong>Halaman Layanan & Harga (layanan.html)</strong> serta kalkulator estimasi biaya.
+              </p>
             </div>
-            <button type="button" class="btn btn-ghost btn-sm" id="resetDefaultServicesBtn" title="Kembalikan ke 6 layanan standar SESIKREASI">
-              <span>↺ Reset ke Default</span>
-            </button>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <a href="layanan.html" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Lihat hasil di Halaman Layanan & Harga">
+                <span>📋 Pratinjau Halaman Layanan ↗</span>
+              </a>
+              <button type="button" class="btn btn-ghost btn-sm" id="resetDefaultServicesBtn" title="Kembalikan ke 6 layanan standar SESIKREASI">
+                <span>↺ Reset ke Default</span>
+              </button>
+            </div>
           </div>
 
           <form id="serviceForm">
             <input type="hidden" id="serviceEditId" value="" />
             
-            <div style="display:grid;grid-template-columns:1fr;gap:1rem;" class="responsive-form-grid">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="responsive-form-grid">
               <div class="form-group">
                 <label for="serviceNameInput" class="form-label">Nama Layanan *</label>
-                <input type="text" id="serviceNameInput" class="form-input" placeholder="Contoh: Cetak Kalender Dinding" required />
+                <input type="text" id="serviceNameInput" class="form-input" placeholder="Contoh: Cetak Undangan Pernikahan" required />
+              </div>
+
+              <div class="form-group">
+                <label for="serviceCategorySelect" class="form-label">Kategori Layanan *</label>
+                <select id="serviceCategorySelect" class="form-select" required>
+                  <option value="desain">🎨 Jasa Desain Grafis</option>
+                  <option value="undangan">💌 Cetak Undangan</option>
+                  <option value="print">🖨️ Cetak Dokumen / Print</option>
+                  <option value="stiker">🏷️ Label Stiker Kemasan</option>
+                  <option value="foto">🖼️ Cetak Foto & Frame</option>
+                  <option value="custom">📦 Cetak Custom & Merchandise</option>
+                </select>
               </div>
 
               <div class="form-group">
                 <label for="servicePriceInput" class="form-label">Harga Dasar Angka (Rp) *</label>
-                <input type="number" id="servicePriceInput" class="form-input" placeholder="Contoh: 25000" min="0" required />
+                <input type="number" id="servicePriceInput" class="form-input" placeholder="Contoh: 2500" min="0" required />
+                <small style="color:#6B7280;font-size:0.75rem;margin-top:2px;display:block;">Digunakan untuk perhitungan otomatis pada kalkulator estimasi biaya.</small>
               </div>
 
               <div class="form-group">
-                <label for="servicePriceLabelInput" class="form-label">Label Tampilan Harga</label>
-                <input type="text" id="servicePriceLabelInput" class="form-input" placeholder="Contoh: Mulai Rp 25.000 / pcs" />
+                <label for="servicePriceLabelInput" class="form-label">Label Tampilan Harga (Teks di Kartu)</label>
+                <input type="text" id="servicePriceLabelInput" class="form-input" placeholder="Contoh: Mulai Rp 2.500 / pcs" />
+                <small style="color:#6B7280;font-size:0.75rem;margin-top:2px;display:block;">Teks yang tampil mencolok pada kartu katalog (bebas disesuaikan).</small>
               </div>
 
               <div class="form-group">
                 <label for="serviceIconInput" class="form-label">Icon Emoji</label>
-                <input type="text" id="serviceIconInput" class="form-input" placeholder="Contoh: 📅" maxlength="4" />
+                <input type="text" id="serviceIconInput" class="form-input" placeholder="Contoh: 💌 (atau 🎨, 🖨️, 🏷️, 🖼️, 📦)" maxlength="4" />
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:0.75rem;">
               <label for="serviceDescInput" class="form-label">Deskripsi Singkat Layanan *</label>
-              <textarea id="serviceDescInput" class="form-textarea" placeholder="Jelaskan secara singkat kegunaan dan keunggulan layanan ini..." required></textarea>
+              <textarea id="serviceDescInput" class="form-textarea" placeholder="Jelaskan secara singkat kegunaan, spesifikasi umum, dan keunggulan layanan ini..." rows="3" required></textarea>
             </div>
 
             <div class="form-group">
-              <label for="serviceFeaturesInput" class="form-label">Fitur / Keunggulan (1 baris per poin)</label>
-              <textarea id="serviceFeaturesInput" class="form-textarea" placeholder="Bahan kertas tebal 260gr&#10;Finishing jilid kawat ring&#10;Desain custom foto keluarga"></textarea>
+              <label for="serviceFeaturesInput" class="form-label">Fitur / Rincian Bahan / Keunggulan (1 baris per poin)</label>
+              <textarea id="serviceFeaturesInput" class="form-textarea" placeholder="Bahan kertas tebal art carton 260gr&#10;Finishing hot print foil emas mewah&#10;Free plastik OPP & kartu ucapan&#10;Tersedia versi undangan digital web" rows="4"></textarea>
+              <small style="color:#6B7280;font-size:0.75rem;margin-top:2px;display:block;">Setiap baris akan otomatis diubah menjadi poin dengan tanda centang (✓) di kartu katalog.</small>
             </div>
 
-            <div style="display:flex;gap:0.75rem;">
+            <div style="display:flex;gap:0.75rem;align-items:center;">
               <button type="submit" class="btn btn-primary" id="btnSaveService">
                 <span>💾 Simpan Layanan</span>
               </button>
@@ -359,10 +384,12 @@
 
         <!-- List Layanan Aktif -->
         <div class="admin-card">
-          <div class="admin-card-header">
+          <div class="admin-card-header" style="flex-wrap:wrap;gap:0.75rem;">
             <div>
               <h2 class="admin-card-title">Daftar Layanan Tersimpan</h2>
-              <p style="font-size:0.85rem;color:var(--color-text-muted);">Katalog ini langsung tersinkronisasi dengan halaman pengunjung (`index.html`).</p>
+              <p style="font-size:0.85rem;color:var(--color-text-muted);">
+                Data layanan di bawah ini otomatis tampil di <a href="layanan.html" target="_blank" style="color:var(--color-primary);font-weight:600;text-decoration:underline;">Halaman Layanan & Harga</a> dan dropdown kalkulator estimasi.
+              </p>
             </div>
           </div>
 
