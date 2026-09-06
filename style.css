@@ -2319,3 +2319,517 @@ button, input, textarea, select {
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
 }
 
+/* ==========================================================================
+   Dedicated Layanan & Harga Page (layanan.html) - Clean Soft Violet Theme
+   ========================================================================== */
+.layanan-hero {
+  background: linear-gradient(180deg, #FAF5FF 0%, #FFFFFF 100%);
+  padding: 3.5rem 0 2rem 0;
+  text-align: center;
+  border-bottom: 1px solid #EFE6FD;
+}
+
+.layanan-hero-badge {
+  margin-bottom: 1rem;
+}
+
+.layanan-hero-title {
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: #1F1135;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.layanan-hero-desc {
+  font-size: 1.05rem;
+  color: #55446F;
+  max-width: 680px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.6;
+}
+
+/* Quick Social Bar */
+.layanan-social-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.layanan-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-full);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.layanan-social-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.layanan-social-pill .pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-wa {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.pill-ig {
+  background: #FDF2F8;
+  border: 1px solid #FBCFE8;
+  color: #BE185D;
+}
+
+.pill-tiktok {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+}
+
+/* Filter Controls Wrapper */
+.filter-controls-wrapper {
+  background: #FFFFFF;
+  border: 1px solid #E2D1F9;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 20px -2px rgba(124, 58, 237, 0.05);
+}
+
+.search-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.15rem;
+}
+
+.search-input-box .search-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 1rem;
+  pointer-events: none;
+  color: #8B5CF6;
+}
+
+.search-field {
+  padding-left: 2.75rem;
+  padding-right: 2.5rem;
+  font-size: 0.95rem;
+  background: #FAF5FF;
+  border-color: #E2D1F9;
+  border-radius: var(--radius-md);
+}
+
+.search-field:focus {
+  background: #FFFFFF;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 0.85rem;
+  background: #E9D5FF;
+  color: #581C87;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-btn:hover {
+  background: #D8B4FE;
+}
+
+.category-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cat-pill {
+  border: 1px solid #E2D1F9;
+  background: #FFFFFF;
+  color: #4C3A69;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cat-pill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #FAF5FF;
+}
+
+.cat-pill.active {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+}
+
+/* Section Soft Violet */
+.section-soft-violet {
+  background: linear-gradient(180deg, #FAF5FF 0%, #F5EEFD 100%);
+  border-top: 1px solid #EFE6FD;
+  border-bottom: 1px solid #EFE6FD;
+}
+
+/* Estimator Card */
+.estimator-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.estimator-card {
+  background: #FFFFFF;
+  border: 1px solid #E2D1F9;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08);
+}
+
+.estimator-result-box {
+  margin-top: 1.5rem;
+  background: #FAF5FF;
+  border: 1.5px dashed #C084FC;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .estimator-result-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.estimator-result-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-label {
+  font-size: 0.85rem;
+  color: #6B5B84;
+  font-weight: 600;
+}
+
+.result-price {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+  margin: 0.2rem 0;
+}
+
+.result-note {
+  font-size: 0.76rem;
+  color: #8B7A9E;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+/* Order Steps Grid */
+.order-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .order-steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.order-step-card {
+  background: #FFFFFF;
+  border: 1px solid #E2D1F9;
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  position: relative;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.order-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
+}
+
+.order-step-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.35);
+}
+
+.order-step-icon {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+.order-step-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1F1135;
+  margin-bottom: 0.6rem;
+}
+
+.order-step-desc {
+  font-size: 0.9rem;
+  color: #55446F;
+  line-height: 1.55;
+}
+
+/* Contact Channels Grid (WA, IG, TikTok) */
+.contact-channels-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-channels-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contact-channel-card {
+  background: #FFFFFF;
+  border: 1px solid #E2D1F9;
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+
+.contact-channel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -6px rgba(124, 58, 237, 0.12);
+  border-color: var(--color-primary-light);
+}
+
+.channel-icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.channel-icon-wa {
+  background: #25D366;
+  color: #FFFFFF;
+}
+
+.channel-icon-ig {
+  background: linear-gradient(45deg, #F09433 0%, #E6683C 25%, #DC2743 50%, #CC2366 75%, #BC1888 100%);
+  color: #FFFFFF;
+}
+
+.channel-icon-tiktok {
+  background: #111827;
+  color: #FFFFFF;
+}
+
+.channel-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.channel-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1F1135;
+  margin-bottom: 0.5rem;
+}
+
+.channel-desc {
+  font-size: 0.88rem;
+  color: #55446F;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.channel-handle {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2E1065;
+  margin-bottom: 1.25rem;
+  background: #FAF5FF;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid #E2D1F9;
+}
+
+.btn-social-ig {
+  background: linear-gradient(45deg, #E1306C 0%, #C13584 100%);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-social-ig:hover {
+  filter: brightness(1.08);
+}
+
+.btn-social-tiktok {
+  background: #111827;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-social-tiktok:hover {
+  background: #000000;
+}
+
+/* FAQ Grid */
+.layanan-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .layanan-faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.faq-item-card {
+  background: #FFFFFF;
+  border: 1px solid #E2D1F9;
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item-question {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1F1135;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item-answer {
+  font-size: 0.88rem;
+  color: #55446F;
+  line-height: 1.55;
+}
+
+/* Floating WhatsApp Instant Button */
+.floating-wa-btn {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  width: 58px;
+  height: 58px;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  z-index: 100;
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.floating-wa-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+}
+
+.floating-wa-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #EF4444;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFFFF;
+}
+
+/* Empty State */
+.empty-state-box {
+  text-align: center;
+  background: #FAF5FF;
+  border: 1px dashed #C084FC;
+  border-radius: var(--radius-lg);
+  padding: 3rem 1.5rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+
