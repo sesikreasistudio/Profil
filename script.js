@@ -400,14 +400,6 @@ function initFrontend() {
   const services = getServices();
 
   // Update dynamic links & contact text
-  const waBtnHero = document.getElementById('heroWaBtn');
-  if (waBtnHero) {
-    waBtnHero.href = getCleanWhatsAppUrl(
-      settings.whatsappNumber,
-      'Halo SESIKREASI, saya ingin konsultasi kebutuhan desain dan cetak.'
-    );
-  }
-
   const directWaLinks = document.querySelectorAll('.dynamic-wa-link');
   directWaLinks.forEach((link) => {
     link.href = getCleanWhatsAppUrl(settings.whatsappNumber, 'Halo SESIKREASI, saya ingin bertanya.');
