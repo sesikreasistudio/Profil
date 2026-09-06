@@ -14,10 +14,10 @@ const STORAGE_KEYS = {
   SETTINGS: 'sesikreasi_settings_v1',
   ADMIN_AUTH_TOKEN: 'sesikreasi_admin_auth_session',
   ADMIN_PASSWORD: 'sesikreasi_admin_password_v1',
-  LEGACY_SERVICES: 'kreakita_services_v1',
-  LEGACY_ORDERS: 'kreakita_orders_v1',
-  LEGACY_SETTINGS: 'kreakita_settings_v1',
-  LEGACY_ADMIN_PASSWORD: 'kreakita_admin_password_v1',
+  LEGACY_SERVICES: 'sesikreasi_services_v1',
+  LEGACY_ORDERS: 'sesikreasi_orders_v1',
+  LEGACY_SETTINGS: 'sesikreasi_settings_v1',
+  LEGACY_ADMIN_PASSWORD: 'sesikreasi_admin_password_v1',
 };
 
 const DEFAULT_ADMIN_PASSWORD = 'RYU1234';
@@ -25,10 +25,10 @@ const DEFAULT_ADMIN_PASSWORD = 'RYU1234';
 const DEFAULT_SETTINGS = {
   studioName: 'SESIKREASI',
   tagline: 'Studio Desain Kreatif & Cetak Berkualitas',
-  whatsappNumber: '6281234567890',
-  address: 'Jl. Melati Raya No. 24, Sentra Kreatif Kota',
+  whatsappNumber: '6287719613858',
+  address: 'Sumberejo, Sawo, Kec. Kutorejo, Kabupaten Mojokerto',
   openingHours: 'Senin - Sabtu (08.00 - 20.00 WIB)',
-  email: 'kontak@sesikreasi.com',
+  email: 'sesikreasi@gmail.com',
   instagram: '@sesikreasi.studio',
   tiktok: '@sesikreasi.studio',
 };
