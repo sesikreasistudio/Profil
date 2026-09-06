@@ -613,34 +613,66 @@ function setupMobileNav() {
   const hamburger = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('mobileDrawer');
   const backdrop = document.getElementById('navBackdrop');
+  const closeBtn = document.getElementById('drawerCloseBtn');
   const navLinks = document.querySelectorAll('.mobile-nav-link');
 
   if (!hamburger || !drawer || !backdrop) return;
 
-  function toggleNav() {
+  function closeNav() {
+    drawer.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    hamburger.classList.remove('is-active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function openNav() {
+    drawer.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    hamburger.classList.add('is-active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function toggleNav(e) {
+    if (e) e.stopPropagation();
     const isOpen = drawer.classList.contains('is-open');
     if (isOpen) {
-      drawer.classList.remove('is-open');
-      backdrop.classList.remove('is-open');
-      hamburger.classList.remove('is-active');
-      document.body.style.overflow = '';
+      closeNav();
     } else {
-      drawer.classList.add('is-open');
-      backdrop.classList.add('is-open');
-      hamburger.classList.add('is-active');
-      document.body.style.overflow = 'hidden';
+      openNav();
     }
   }
 
+  // Bind click & touchstart to avoid touch delay on mobile devices
   hamburger.addEventListener('click', toggleNav);
-  backdrop.addEventListener('click', toggleNav);
+  backdrop.addEventListener('click', closeNav);
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeNav);
+  }
 
+  // Handle all mobile navigation link clicks
   navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      drawer.classList.remove('is-open');
-      backdrop.classList.remove('is-open');
-      hamburger.classList.remove('is-active');
-      document.body.style.overflow = '';
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      closeNav();
+
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          // Timeout ensures body overflow:hidden has released before scrolling
+          setTimeout(() => {
+            const headerHeight = 72;
+            const elementTop = targetEl.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: Math.max(0, elementTop - headerHeight),
+              behavior: 'smooth',
+            });
+          }, 120);
+        }
+      }
     });
   });
 
@@ -654,7 +686,7 @@ function setupMobileNav() {
         header.classList.remove('scrolled');
       }
     }
-  });
+  }, { passive: true });
 }
 
 function setupContactForm(settings) {
@@ -1702,52 +1734,6 @@ function initLayananPage() {
 
   // Initial contacts update
   updateLayananContacts(settings);
-  const channelWaHandle = document.getElementById('channelWaHandle');
-  if (channelWaHandle) channelWaHandle.textContent = `+${waNumberClean}`;
-
-  // Update Instagram
-  if (settings.instagram) {
-    const rawIg = settings.instagram.replace(/^@/, '').trim();
-    const igUrl = `https://instagram.com/${rawIg}`;
-    const igHandleText = `@${rawIg}`;
-
-    const heroQuickIg = document.getElementById('heroQuickIg');
-    if (heroQuickIg) heroQuickIg.href = igUrl;
-    const quickIgHandle = document.getElementById('quickIgHandle');
-    if (quickIgHandle) quickIgHandle.textContent = igHandleText;
-
-    const btnChannelIg = document.getElementById('btnChannelIg');
-    if (btnChannelIg) btnChannelIg.href = igUrl;
-    const channelIgHandle = document.getElementById('channelIgHandle');
-    if (channelIgHandle) channelIgHandle.textContent = igHandleText;
-
-    const footerIgLink = document.getElementById('footerIgLink');
-    if (footerIgLink) footerIgLink.href = igUrl;
-    const footerIgVal = document.getElementById('footerIgVal');
-    if (footerIgVal) footerIgVal.textContent = igHandleText;
-  }
-
-  // Update TikTok
-  if (settings.tiktok) {
-    const rawTiktok = settings.tiktok.replace(/^@/, '').trim();
-    const tiktokUrl = `https://tiktok.com/@${rawTiktok}`;
-    const tiktokHandleText = `@${rawTiktok}`;
-
-    const heroQuickTiktok = document.getElementById('heroQuickTiktok');
-    if (heroQuickTiktok) heroQuickTiktok.href = tiktokUrl;
-    const quickTiktokHandle = document.getElementById('quickTiktokHandle');
-    if (quickTiktokHandle) quickTiktokHandle.textContent = tiktokHandleText;
-
-    const btnChannelTiktok = document.getElementById('btnChannelTiktok');
-    if (btnChannelTiktok) btnChannelTiktok.href = tiktokUrl;
-    const channelTiktokHandle = document.getElementById('channelTiktokHandle');
-    if (channelTiktokHandle) channelTiktokHandle.textContent = tiktokHandleText;
-
-    const footerTiktokLink = document.getElementById('footerTiktokLink');
-    if (footerTiktokLink) footerTiktokLink.href = tiktokUrl;
-    const footerTiktokVal = document.getElementById('footerTiktokVal');
-    if (footerTiktokVal) footerTiktokVal.textContent = tiktokHandleText;
-  }
 
   // 2. Services Rendering, Filtering & Search
   const container = document.getElementById('layananServicesContainer');
@@ -2011,6 +1997,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const chatbotBox = document.getElementById('chatbotBox');
       if (chatbotBox?.classList.contains('is-open')) {
         chatbotBox.classList.remove('is-open');
+      }
+      const drawer = document.getElementById('mobileDrawer');
+      if (drawer?.classList.contains('is-open')) {
+        drawer.classList.remove('is-open');
+        document.getElementById('navBackdrop')?.classList.remove('is-open');
+        document.getElementById('hamburgerBtn')?.classList.remove('is-active');
+        document.body.style.overflow = '';
       }
     }
   });
