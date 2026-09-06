@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katalog Layanan & Harga Resmi - SESIKREASI Studio</title>
+    <meta name="description" content="Daftar lengkap layanan desain kreatif, cetak undangan, print & jilid, label stiker, cetak foto dan custom cetak SESIKREASI dengan harga transparan dan kontak langsung WhatsApp, Instagram & TikTok." />
+    <meta property="og:title" content="Katalog Layanan & Harga Resmi - SESIKREASI Studio" />
+    <meta property="og:description" content="Informasi lengkap layanan desain dan percetakan presisi, daftar harga transparan, dan pemesanan cepat via WhatsApp." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body id="layananApp">
+    <!-- Header & Navigation Khusus Halaman Layanan -->
+    <header class="header" id="mainHeader">
+      <div class="container">
+        <nav class="nav-container" aria-label="Navigasi Halaman Layanan">
+          <!-- Logo Studio -->
+          <a href="index.html" class="logo" id="brandLogo" title="Kembali ke Website Utama">
+            <span class="logo-symbol">S</span>
+            <span>SESI<span class="logo-accent">KREASI</span></span>
+          </a>
+
+          <!-- Desktop Quick Navigation -->
+          <ul class="nav-menu" id="layananNavMenu">
+            <li><a href="#katalog" class="nav-link active">Katalog & Harga</a></li>
+            <li><a href="#kalkulator" class="nav-link">Hitung Estimasi</a></li>
+            <li><a href="#cara-order" class="nav-link">Cara Order</a></li>
+          </ul>
+
+          <!-- Nav Actions -->
+          <div class="nav-actions">
+            <a href="index.html" class="btn btn-ghost btn-sm" id="btnBackToHome" title="Kembali ke Profil Lengkap Studio">
+              <span>← Profil Studio</span>
+            </a>
+            <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI,%20saya%20ingin%20tanya%20layanan%20dan%20harga" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm dynamic-wa-link" id="navWaCta">
+              <span>💬 Tanya via WA</span>
+            </a>
+
+            <!-- Mobile Hamburger Button -->
+            <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Buka Menu Navigasi" aria-expanded="false">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div class="mobile-nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-nav-drawer" id="mobileDrawer" aria-label="Menu Mobile Layanan">
+      <div style="padding: 1.25rem 1.5rem 0.5rem; border-bottom: 1px solid var(--color-border);">
+        <span class="badge badge-purple">📋 Halaman Khusus Layanan</span>
+      </div>
+      <ul class="mobile-nav-list">
+        <li><a href="#katalog" class="mobile-nav-link active"><span>Katalog & Daftar Harga</span> <span>→</span></a></li>
+        <li><a href="#kalkulator" class="mobile-nav-link"><span>Kalkulator Estimasi</span> <span>→</span></a></li>
+        <li><a href="#cara-order" class="mobile-nav-link"><span>Cara Pemesanan</span> <span>→</span></a></li>
+        <li><a href="index.html" class="mobile-nav-link"><span>← Kembali ke Profil Studio</span> <span>🏠</span></a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block dynamic-wa-link" id="mobileDrawerWaBtn">
+          <span>💬 Chat WhatsApp Studio</span>
+        </a>
+      </div>
+    </aside>
+
+    <main id="mainContent">
+      <!-- Hero Section Khusus Layanan & Harga -->
+      <section class="layanan-hero" id="top">
+        <div class="container">
+          <div class="layanan-hero-badge">
+            <span class="badge badge-purple">✨ Daftar Resmi & Transparansi Biaya</span>
+          </div>
+          <h1 class="layanan-hero-title">Katalog Layanan & Rincian Harga</h1>
+          <p class="layanan-hero-desc">
+            Pilih kebutuhan desain grafis dan cetak Anda dengan spesifikasi jelas, kualitas presisi, serta kemudahan konsultasi dan pemesanan langsung melalui WhatsApp.
+          </p>
+
+          <!-- Quick Social & Contact Bar -->
+          <div class="layanan-social-bar" id="quickSocialBar">
+            <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI,%20saya%20ingin%20konsultasi%20layanan" target="_blank" rel="noopener noreferrer" class="layanan-social-pill pill-wa dynamic-wa-link" id="heroQuickWa">
+              <span class="pill-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+              </span>
+              <span>WhatsApp: <strong id="quickWaNumber">+62 812-3456-7890</strong></span>
+            </a>
+
+            <a href="https://instagram.com/sesikreasi.studio" target="_blank" rel="noopener noreferrer" class="layanan-social-pill pill-ig" id="heroQuickIg" title="Kunjungi Instagram SESIKREASI">
+              <span class="pill-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </span>
+              <span>Instagram: <strong id="quickIgHandle">@sesikreasi.studio</strong></span>
+            </a>
+
+            <a href="https://tiktok.com/@sesikreasi.studio" target="_blank" rel="noopener noreferrer" class="layanan-social-pill pill-tiktok" id="heroQuickTiktok" title="Kunjungi TikTok SESIKREASI">
+              <span class="pill-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                </svg>
+              </span>
+              <span>TikTok: <strong id="quickTiktokHandle">@sesikreasi.studio</strong></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Search & Filter Controls -->
+      <section class="section" id="katalog" style="padding-top: 1.5rem; padding-bottom: 3rem;">
+        <div class="container">
+          <!-- Search & Filter Header -->
+          <div class="filter-controls-wrapper">
+            <div class="search-input-box">
+              <span class="search-icon">🔍</span>
+              <input 
+                type="text" 
+                id="serviceSearchInput" 
+                class="form-input search-field" 
+                placeholder="Ketik nama layanan atau produk (contoh: stiker, undangan, logo, print)..." 
+                aria-label="Cari layanan atau produk"
+              />
+              <button type="button" id="clearSearchBtn" class="clear-search-btn" style="display: none;" title="Hapus pencarian">✕</button>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills-list" id="categoryFilterTabs" role="tablist" aria-label="Filter Kategori Layanan">
+              <button type="button" class="cat-pill active" data-cat="all" role="tab" aria-selected="true">
+                Semua Layanan
+              </button>
+              <button type="button" class="cat-pill" data-cat="desain" role="tab" aria-selected="false">
+                🎨 Jasa Desain
+              </button>
+              <button type="button" class="cat-pill" data-cat="undangan" role="tab" aria-selected="false">
+                💌 Cetak Undangan
+              </button>
+              <button type="button" class="cat-pill" data-cat="print" role="tab" aria-selected="false">
+                🖨️ Print & Jilid
+              </button>
+              <button type="button" class="cat-pill" data-cat="stiker" role="tab" aria-selected="false">
+                🏷️ Label Stiker
+              </button>
+              <button type="button" class="cat-pill" data-cat="foto" role="tab" aria-selected="false">
+                🖼️ Cetak Foto
+              </button>
+              <button type="button" class="cat-pill" data-cat="custom" role="tab" aria-selected="false">
+                🧾 Nota & Cetak Custom
+              </button>
+            </div>
+          </div>
+
+          <!-- Services Grid Container -->
+          <div class="services-grid" id="layananServicesContainer" style="margin-top: 2rem;">
+            <!-- Rendered by script.js dynamically from getServices() -->
+          </div>
+
+          <!-- Empty State (If Search Matches Nothing) -->
+          <div id="noServiceFound" class="empty-state-box" style="display: none; margin-top: 2.5rem;">
+            <div class="empty-state-icon">🔎</div>
+            <h3>Layanan Tidak Ditemukan</h3>
+            <p>Maaf, kata kunci yang Anda masukkan belum cocok dengan katalog layanan kami. Silakan coba kata kunci lain atau langsung hubungi kami via WhatsApp untuk layanan khusus.</p>
+            <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI,%20saya%20mencari%20layanan%20kustom" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp dynamic-wa-link" style="margin-top: 1rem;">
+              <span>💬 Tanya Layanan Custom via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Quick Price Estimator -->
+      <section class="section section-soft-violet" id="kalkulator">
+        <div class="container">
+          <div class="section-header text-center" style="max-width: 680px; margin: 0 auto 2.25rem;">
+            <span class="badge badge-purple">⚡ Simulasi Cepat</span>
+            <h2 class="section-title">Kalkulator Estimasi Biaya Pesanan</h2>
+            <p class="section-subtitle">
+              Pilih jenis layanan dan jumlah yang Anda butuhkan untuk melihat perkiraan biaya transparan sebelum melakukan pemesanan via WhatsApp.
+            </p>
+          </div>
+
+          <div class="estimator-container">
+            <div class="estimator-card">
+              <form id="priceEstimatorForm" class="estimator-form">
+                <div class="form-row">
+                  <div class="form-group" style="flex: 1.4;">
+                    <label for="estimatorServiceSelect" class="form-label">Pilih Layanan</label>
+                    <select id="estimatorServiceSelect" class="form-select" required>
+                      <!-- Populated dynamically -->
+                    </select>
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label for="estimatorQuantity" class="form-label">Jumlah / Satuan</label>
+                    <input 
+                      type="number" 
+                      id="estimatorQuantity" 
+                      class="form-input" 
+                      min="1" 
+                      value="1" 
+                      required 
+                    />
+                    <span id="estimatorUnitLabel" class="form-hint" style="display:block; margin-top:0.35rem; font-size:0.8rem; color:var(--color-text-muted);">
+                      Satuan: pcs / paket
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                  <label for="estimatorNotes" class="form-label">Catatan Spesifikasi Khusus (Opsional)</label>
+                  <input 
+                    type="text" 
+                    id="estimatorNotes" 
+                    class="form-input" 
+                    placeholder="Contoh: Bahan Art Carton 260gr, laminasi doff, ukuran A5..." 
+                  />
+                </div>
+
+                <!-- Live Estimated Output Box -->
+                <div class="estimator-result-box">
+                  <div class="estimator-result-info">
+                    <span class="result-label">Perkiraan Total Biaya:</span>
+                    <span class="result-price" id="estimatorTotalPrice">Rp 75.000</span>
+                    <span class="result-note">*Harga final dapat menyesuaikan kerumitan desain atau spesifikasi bahan khusus saat konsultasi.</span>
+                  </div>
+                  <button type="button" id="btnSendEstimatedOrder" class="btn btn-whatsapp btn-lg">
+                    <span>💬 Kirim Estimasi Ini ke WhatsApp</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 Langkah Pemesanan Mudah -->
+      <section class="section" id="cara-order">
+        <div class="container">
+          <div class="section-header text-center" style="max-width: 650px; margin: 0 auto 3rem;">
+            <span class="badge badge-purple">✨ Alur Praktis</span>
+            <h2 class="section-title">3 Langkah Mudah Memesan di SESIKREASI</h2>
+            <p class="section-subtitle">
+              Proses cepat, komunikasi transparan, dan pengerjaan yang terstruktur dari konsultasi hingga hasil siap diterima.
+            </p>
+          </div>
+
+          <div class="order-steps-grid">
+            <div class="order-step-card">
+              <div class="order-step-badge">1</div>
+              <div class="order-step-icon">💬</div>
+              <h3 class="order-step-title">Pilih & Konsultasi</h3>
+              <p class="order-step-desc">
+                Tentukan layanan yang Anda butuhkan, lalu klik tombol pesan WhatsApp untuk mendiskusikan ukuran, bahan, konsep, dan tenggat waktu.
+              </p>
+            </div>
+
+            <div class="order-step-card">
+              <div class="order-step-badge">2</div>
+              <div class="order-step-icon">🎨</div>
+              <h3 class="order-step-title">Preview & ACC Desain</h3>
+              <p class="order-step-desc">
+                Tim desainer kami akan membuat mockup atau mengecek file cetak Anda. Proses cetak hanya berjalan setelah Anda menyetujui (ACC) hasil preview.
+              </p>
+            </div>
+
+            <div class="order-step-card">
+              <div class="order-step-badge">3</div>
+              <div class="order-step-icon">📦</div>
+              <h3 class="order-step-title">Produksi & Pengambilan</h3>
+              <p class="order-step-desc">
+                Pesanan dicetak dengan standar mesin presisi tinggi. Setelah selesai dan melalui kontrol mutu, barang siap diambil di studio atau dikirim ke lokasi Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Singkat Layanan & Harga -->
+      <section class="section" id="faq">
+        <div class="container">
+          <div class="section-header text-center" style="max-width: 650px; margin: 0 auto 2.5rem;">
+            <span class="badge badge-purple">💡 Tanya Jawab</span>
+            <h2 class="section-title">Pertanyaan Seputar Layanan & Harga</h2>
+            <p class="section-subtitle">Hal-hal yang sering ditanyakan konsumen sebelum memesan.</p>
+          </div>
+
+          <div class="layanan-faq-grid">
+            <div class="faq-item-card">
+              <h3 class="faq-item-question">❓ Apakah ada minimal pemesanan (MOQ)?</h3>
+              <p class="faq-item-answer">
+                Tergantung jenis layanan. Untuk print dokumen dan jasa desain tidak ada minimal order (bisa satuan). Untuk stiker kemasan mulai dari 1 lembar A3+, dan undangan biasanya mulai 100 pcs untuk harga terbaik.
+              </p>
+            </div>
+
+            <div class="faq-item-card">
+              <h3 class="faq-item-question">❓ Berapa lama proses pengerjaannya?</h3>
+              <p class="faq-item-answer">
+                Print dokumen & cetak stiker standar bisa selesai 1–2 hari kerja (tersedia opsi kilat/same-day jika antrean memungkinkan). Jasa desain memakan waktu 1–3 hari, sedangkan cetak undangan berkisar 5–10 hari kerja setelah ACC desain.
+              </p>
+            </div>
+
+            <div class="faq-item-card">
+              <h3 class="faq-item-question">❓ Format file apa yang harus saya kirim jika sudah punya desain?</h3>
+              <p class="faq-item-answer">
+                Kami menyarankan file berformat PDF, CDR (CorelDraw), AI (Illustrator), atau gambar resolusi tinggi (PNG/JPG 300 DPI) dengan format warna CMYK agar warna cetak tidak bergeser.
+              </p>
+            </div>
+
+            <div class="faq-item-card">
+              <h3 class="faq-item-question">❓ Apakah bisa pesan ukuran atau bahan kustom di luar daftar?</h3>
+              <p class="faq-item-answer">
+                Tentu saja bisa! Kami melayani berbagai ukuran dan jenis bahan khusus (kertas daur ulang, stiker hologram, finishing hot print, dll). Cukup diskusikan spesifikasinya dengan admin via WhatsApp.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Khusus Halaman Layanan -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="index.html" class="logo footer-logo" title="Kembali ke Beranda">
+              <span class="logo-symbol">S</span>
+              <span>SESI<span class="logo-accent">KREASI</span></span>
+            </a>
+            <p>
+              Halaman resmi daftar layanan, rincian harga, serta kanal komunikasi WhatsApp, Instagram, dan TikTok SESIKREASI Studio.
+            </p>
+            <div style="margin-top: 1rem;">
+              <a href="index.html" class="btn btn-ghost btn-sm" style="background:#FFFFFF; border:1px solid #E2D1F9; color:#2E1065;">
+                <span>🏠 Kunjungi Website Profil Utama</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-title">Navigasi Halaman</h4>
+            <ul class="footer-links">
+              <li><a href="#katalog" class="footer-link">Daftar Layanan & Harga</a></li>
+              <li><a href="#kalkulator" class="footer-link">Simulasi Estimasi Biaya</a></li>
+              <li><a href="#cara-order" class="footer-link">Alur Pemesanan</a></li>
+              <li><a href="#faq" class="footer-link">Tanya Jawab (FAQ)</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-title">Kontak & Media Sosial</h4>
+            <ul class="footer-social-list">
+              <li>
+                <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI,%20saya%20ingin%20konsultasi%20layanan" target="_blank" rel="noopener noreferrer" class="footer-social-link dynamic-wa-link" id="footerWaLink" title="Hubungi WhatsApp SESIKREASI">
+                  <span class="footer-social-icon footer-social-icon-wa" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                  </span>
+                  <div class="footer-social-meta">
+                    <span class="footer-social-name">WhatsApp</span>
+                    <span class="footer-social-sub" id="footerWaVal">+62 812-3456-7890</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://instagram.com/sesikreasi.studio" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footerIgLink" title="Kunjungi Instagram SESIKREASI">
+                  <span class="footer-social-icon footer-social-icon-ig" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  </span>
+                  <div class="footer-social-meta">
+                    <span class="footer-social-name">Instagram</span>
+                    <span class="footer-social-sub" id="footerIgVal">@sesikreasi.studio</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://tiktok.com/@sesikreasi.studio" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footerTiktokLink" title="Kunjungi TikTok SESIKREASI">
+                  <span class="footer-social-icon footer-social-icon-tiktok" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    </svg>
+                  </span>
+                  <div class="footer-social-meta">
+                    <span class="footer-social-name">TikTok</span>
+                    <span class="footer-social-sub" id="footerTiktokVal">@sesikreasi.studio</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            &copy; 2026 <strong>SESIKREASI Studio</strong>. Hak Cipta Dilindungi.
+          </div>
+          <div>
+            <a href="admin.html" class="admin-access-link">
+              <span>🔐 Masuk Dashboard Admin</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp Instant Button -->
+    <a href="https://wa.me/6281234567890?text=Halo%20SESIKREASI,%20saya%20ingin%20tanya%20layanan%20dan%20harga" target="_blank" rel="noopener noreferrer" class="floating-wa-btn dynamic-wa-link" id="floatingWaBtn" title="Chat WhatsApp Studio">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+      </svg>
+      <span class="floating-wa-badge" aria-hidden="true">1</span>
+    </a>
+
+    <!-- JavaScript Application Logic -->
+    <script src="./script.js"></script>
+  </body>
+</html>
