@@ -459,6 +459,14 @@ function initFrontend() {
   // Contact Form Setup
   setupContactForm(settings);
 
+  // Ensure hero services button navigation works reliably on all mobile browsers & devices
+  const heroServicesBtn = document.getElementById('heroServicesBtn');
+  if (heroServicesBtn) {
+    heroServicesBtn.addEventListener('click', (e) => {
+      window.location.href = 'layanan.html';
+    });
+  }
+
   // Ensure clicking any admin link always resets auth session so password prompt is displayed
   document.querySelectorAll('a[href*="admin.html"]').forEach((link) => {
     link.addEventListener('click', () => {
