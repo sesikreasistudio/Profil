@@ -29,8 +29,8 @@ const DEFAULT_SETTINGS = {
   address: 'Ds. Sawo, Kec. Kutorejo, Kabupaten Mojokerto',
   openingHours: 'Senin - Sabtu (08.00 - 20.00 WIB)',
   email: 'sesikreasi@gmail.com',
-  instagram: '@sesikreasi.studio',
-  tiktok: '@sesikreasi.studio',
+  instagram: '@sesikreasi.std',
+  tiktok: '@sesikreasi.std',
 };
 
 const DEFAULT_SERVICES = [
@@ -44,9 +44,10 @@ const DEFAULT_SERVICES = [
     desc: 'Layanan desain visual profesional untuk kebutuhan personal hingga branding bisnis komersial.',
     features: [
       'Desain Logo & Brand Identity',
-      'Feed & Story Instagram Kreatif',
+      'Desain Undangan Custom',
+      'Desain Sertifikat Lomba',
       'Desain Brosur, Banner & Spanduk',
-      'Revisi Fleksibel & File Master Lengkap (AI, PDF, PNG)',
+      'Dll',
     ],
   },
   {
@@ -54,14 +55,15 @@ const DEFAULT_SERVICES = [
     name: 'Cetak Undangan',
     category: 'undangan',
     price: 2500,
-    priceLabel: 'Mulai Rp 2.500 / pcs',
+    priceLabel: 'Mulai Rp 400 / pcs',
     icon: '💌',
-    desc: 'Cetak undangan pernikahan, khitanan, dan acara formal dengan pilihan kertas elegan dan finishing mewah.',
+    desc: 'Cetak undangan pernikahan, khitanan, dan acara formal dengan pilihan desain atau custom',
     features: [
-      'Model Softcover & Hardcover Eksklusif',
-      'Hot Print Foil Emas/Perak & Emboss',
-      'Free Plastik OPP, Label Nama & Kartu Ucapan',
-      'Tersedia Versi Undangan Digital (Web/Video)',
+      'Pilihan desain beragam atau pesan custom',
+      'Kertas BC dan Art paper',
+      'Free Plastik OPP',
+      'Opsi tambahan label nama',
+      'Opsi Tersedia Versi Undangan Digital (Web/Video)',
     ],
   },
   {
@@ -71,12 +73,12 @@ const DEFAULT_SERVICES = [
     price: 1000,
     priceLabel: 'Mulai Rp 1.000 / lbr',
     icon: '🖨️',
-    desc: 'Print dokumen, laporan skripsi, proposal, poster hingga media promosi A3+ dengan warna tajam dan presisi.',
+    desc: 'Print dokumen, laporan skripsi, tugas sekolah, Hitam putih dan full color',
     features: [
       'Print Dokumen Warna & Hitam Putih Cepat',
-      'Kertas Art Paper, Art Carton, Linen & HVS',
-      'Print Poster A3+ Kualitas Foto High-Res',
-      'Jilid Spiral Kawat, Softcover & Hardcover',
+      'Kertas Art Paper, Linen & HVS',
+      'Tanpa minimum order',
+      'Tersedia Jilid Spiral Kawat',
     ],
   },
   {
@@ -1681,7 +1683,7 @@ function initAdmin() {
         openingHours: document.getElementById('settingHours').value.trim(),
         email: document.getElementById('settingEmail').value.trim(),
         instagram: document.getElementById('settingInstagram').value.trim(),
-        tiktok: document.getElementById('settingTiktok') ? document.getElementById('settingTiktok').value.trim() : '@sesikreasi.studio',
+        tiktok: document.getElementById('settingTiktok') ? document.getElementById('settingTiktok').value.trim() : '@sesikreasi.std',
       };
 
       saveSettings(updated);
@@ -1781,9 +1783,9 @@ function initLayananPage() {
     });
 
     // Update Instagram & TikTok links
-    const igHandleText = currentSettings.instagram || '@sesikreasi.studio';
+    const igHandleText = currentSettings.instagram || '@sesikreasi.std';
     const igUsername = igHandleText.replace(/^@/, '').trim();
-    const igUrl = `https://instagram.com/${igUsername}`;
+    const igUrl = `https://www.instagram.com/sesikreasi.std/`;
 
     const footerIgLink = document.getElementById('footerIgLink');
     if (footerIgLink) footerIgLink.href = igUrl;
