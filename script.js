@@ -243,11 +243,11 @@ function getSettings() {
     }
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed.studioName === 'KREAKITA' || !parsed.studioName) {
+      if (parsed.studioName === 'SESIKREASI' || !parsed.studioName) {
         parsed.studioName = 'SESIKREASI';
-        if (parsed.email === 'kontak@kreakita.com') parsed.email = 'kontak@sesikreasi.com';
-        if (parsed.instagram === '@kreakita.studio') parsed.instagram = '@sesikreasi.studio';
-        if (parsed.tiktok === '@kreakita.studio') parsed.tiktok = '@sesikreasi.studio';
+        if (parsed.email === 'sesikreasi@gmail.com') parsed.email = 'sesikreasi@gmail.com';
+        if (parsed.instagram === '@sesikreasi.std') parsed.instagram = '@sesikreasi.std';
+        if (parsed.tiktok === '@sesikreasi.std') parsed.tiktok = '@sesikreasi.std';
       }
       saveSettings(parsed);
       return { ...DEFAULT_SETTINGS, ...parsed };
