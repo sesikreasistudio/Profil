@@ -1671,7 +1671,7 @@ function initAdmin() {
     document.getElementById('settingEmail').value = settings.email || '';
     document.getElementById('settingInstagram').value = settings.instagram || '';
     const tiktokSettingField = document.getElementById('settingTiktok');
-    if (tiktokSettingField) tiktokSettingField.value = settings.tiktok || '@sesikreasi.studio';
+    if (tiktokSettingField) tiktokSettingField.value = settings.tiktok || '@sesikreasi.std';
 
     settingsForm.addEventListener('submit', (e) => {
       e.preventDefault();
