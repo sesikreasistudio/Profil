@@ -1044,8 +1044,8 @@ function setupChatbot(settings, services) {
       lower.includes('tiktok') ||
       lower.includes('sosmed')
     ) {
-      const igHandle = settings.instagram || '@sesikreasi.studio';
-      const tiktokHandle = settings.tiktok || '@sesikreasi.studio';
+      const igHandle = settings.instagram || '@sesikreasi.std';
+      const tiktokHandle = settings.tiktok || '@sesikreasi.std';
       const portfolioText = `🎨 <strong>Contoh Karya & Portofolio SESIKREASI:</strong><br>
       Anda dapat melihat 6 contoh karya terbaik kami di bagian <strong>Portofolio</strong> website ini.<br><br>
       Untuk melihat lebih banyak contoh karya dan video proses pengerjaan, silakan kunjungi akun kami:<br>
