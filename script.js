@@ -1792,7 +1792,7 @@ function initLayananPage() {
     const footerIgVal = document.getElementById('footerIgVal');
     if (footerIgVal) footerIgVal.textContent = igHandleText;
 
-    const tiktokHandleText = currentSettings.tiktok || '@sesikreasi.studio';
+    const tiktokHandleText = currentSettings.tiktok || '@sesikreasi.std';
     const tiktokUsername = tiktokHandleText.replace(/^@/, '').trim();
     const tiktokUrl = `https://tiktok.com/@${tiktokUsername}`;
 
