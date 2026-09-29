@@ -9,121 +9,127 @@
 // 1. DEFAULT DATA & STORAGE KEYS
 // ==========================================================================
 const STORAGE_KEYS = {
-  SERVICES: 'sesikreasi_services_v1',
-  ORDERS: 'sesikreasi_orders_v1',
+  SERVICES: 'sesikreasi_services_v2',
+  ORDERS: 'sesikreasi_orders_v2',
   SETTINGS: 'sesikreasi_settings_v1',
   ADMIN_AUTH_TOKEN: 'sesikreasi_admin_auth_session',
   ADMIN_PASSWORD: 'sesikreasi_admin_password_v1',
-  LEGACY_SERVICES: 'sesikreasi_services_v1',
-  LEGACY_ORDERS: 'sesikreasi_orders_v1',
-  LEGACY_SETTINGS: 'sesikreasi_settings_v1',
-  LEGACY_ADMIN_PASSWORD: 'sesikreasi_admin_password_v1',
+  LEGACY_SERVICES_V1: 'sesikreasi_services_v1',
+  LEGACY_ORDERS_V1: 'sesikreasi_orders_v1',
+  LEGACY_SERVICES: 'kreakita_services_v1',
+  LEGACY_ORDERS: 'kreakita_orders_v1',
+  LEGACY_SETTINGS: 'kreakita_settings_v1',
+  LEGACY_ADMIN_PASSWORD: 'kreakita_admin_password_v1',
 };
 
 const DEFAULT_ADMIN_PASSWORD = 'RYU1234';
 
 const DEFAULT_SETTINGS = {
   studioName: 'SESIKREASI',
-  tagline: 'Studio Desain Kreatif & Cetak Berkualitas',
-  whatsappNumber: '6287719613858',
-  address: 'Ds. Sawo, Kec. Kutorejo, Kabupaten Mojokerto',
+  tagline: 'Studio Spesialis Undangan & Cetak Acara Berkualitas',
+  whatsappNumber: '6281234567890',
+  address: 'Jl. Melati Raya No. 24, Sentra Kreatif Kota',
   openingHours: 'Senin - Sabtu (08.00 - 20.00 WIB)',
-  email: 'sesikreasi@gmail.com',
-  instagram: '@sesikreasi.std',
-  tiktok: '@sesikreasi.std',
+  email: 'kontak@sesikreasi.com',
+  instagram: '@sesikreasi.studio',
+  tiktok: '@sesikreasi.studio',
 };
 
 const DEFAULT_SERVICES = [
   {
     id: 'srv-1',
-    name: 'Jasa Desain',
-    category: 'desain',
-    price: 75000,
-    priceLabel: 'Mulai Rp 75.000',
-    icon: '🎨',
-    desc: 'Layanan desain visual profesional untuk kebutuhan personal hingga branding bisnis komersial.',
+    name: 'Undangan Hardcover Eksklusif',
+    category: 'undangan-cetak',
+    price: 4500,
+    priceLabel: 'Mulai Rp 4.500 / pcs',
+    icon: '💌',
+    desc: 'Undangan pernikahan fisik premium dengan board tebal kokoh, finishing hot print foil emas/rose gold, pita satin, wax seal, & amplop mewah.',
     features: [
-      'Desain Logo & Brand Identity',
-      'Desain Undangan Custom',
-      'Desain Sertifikat Lomba',
-      'Desain Brosur, Banner & Spanduk',
-      'Dll',
+      'Board Tebal No. 30/40 & Kertas Jasmine Glitter',
+      'Hot Print Foil Emas/Rose Gold & Emboss Timbul Elegan',
+      'Free Plastik OPP Tebal & Label Nama Tamu Cetak',
+      'Free Kartu Souvenir & Buku Tamu Eksklusif (Min. 300 pcs)',
+      'Bonus Undangan Video Animasi Reels/Story Siap Sebar',
     ],
   },
   {
     id: 'srv-2',
-    name: 'Cetak Undangan',
-    category: 'undangan',
+    name: 'Undangan Softcover Elegan & Ekonomis',
+    category: 'undangan-cetak',
     price: 2500,
-    priceLabel: 'Mulai Rp 400 / pcs',
-    icon: '💌',
-    desc: 'Cetak undangan pernikahan, khitanan, dan acara formal dengan pilihan desain atau custom',
+    priceLabel: 'Mulai Rp 2.500 / pcs',
+    icon: '📜',
+    desc: 'Undangan pernikahan modern & ekonomis berbahan Art Carton 260/310gr dengan laminasi doff halus, desain eksklusif, dan lipat rapi presisi.',
     features: [
-      'Pilihan desain beragam atau pesan custom',
-      'Kertas BC dan Art paper',
-      'Free Plastik OPP',
-      'Opsi tambahan label nama',
-      'Opsi Tersedia Versi Undangan Digital (Web/Video)',
+      'Kertas Art Carton 260gr / 310gr Laminasi Doff Halus',
+      'Pilihan Desain Tema Rustic, Floral Watercolor, & Minimalis',
+      'Free Plastik OPP Pembungkus & Stiker Label Nama Tamu',
+      'Free Kartu Ucapan Terima Kasih (Thank You Card Souvenir)',
+      'Revisi Desain Fleksibel Tanpa Batas Hingga ACC Siap Cetak',
     ],
   },
   {
     id: 'srv-3',
-    name: 'Print',
-    category: 'print',
-    price: 1000,
-    priceLabel: 'Mulai Rp 1.000 / lbr',
-    icon: '🖨️',
-    desc: 'Print dokumen, laporan skripsi, tugas sekolah, Hitam putih dan full color',
+    name: 'Undangan Digital Website Interaktif',
+    category: 'undangan-digital',
+    price: 99000,
+    priceLabel: 'Promo Rp 99.000 / paket',
+    icon: '🌐',
+    desc: 'Undangan berbasis website responsif tanpa batasan tamu, dilengkapi musik latar romantis, RSVP WhatsApp otomatis, navigasi Maps, & galeri foto.',
     features: [
-      'Print Dokumen Warna & Hitam Putih Cepat',
-      'Kertas Art Paper, Linen & HVS',
-      'Tanpa minimum order',
-      'Tersedia Jilid Spiral Kawat',
+      'Bebas Custom Nama Tamu Tanpa Batas (Unlimited Tamu)',
+      'Konfirmasi Kehadiran (RSVP) WhatsApp & Buku Tamu Digital',
+      'Navigasi Peta Google Maps & Waze Langsung ke Lokasi Acara',
+      'Countdown Timer Hari H, Galeri Foto Pre-Wedding & Video',
+      'Fitur Amplop Digital / Kirim Hadiah & Musik Latar Romantis',
     ],
   },
   {
     id: 'srv-4',
-    name: 'Label Stiker',
-    category: 'stiker',
-    price: 12000,
-    priceLabel: 'Mulai Rp 12.000 / A3+',
-    icon: '🏷️',
-    desc: 'Stiker kemasan produk makanan, minuman, dan merchandise dengan teknologi cetak tahan air dan cutting presisi.',
+    name: 'Video Undangan Animasi HD',
+    category: 'undangan-video',
+    price: 65000,
+    priceLabel: 'Mulai Rp 65.000 / video',
+    icon: '🎬',
+    desc: 'Video undangan gerak estetis 15-60 detik resolusi Full HD untuk dibagikan di Instagram Story, Reels, WhatsApp Status, dan TikTok.',
     features: [
-      'Bahan Vinyl Susu, Transparan & Chromo',
-      'Laminasi Doff atau Glossy Anti Air',
-      'Cutting Otomatis Kiss-Cut & Die-Cut',
-      'Desain Custom Sesuai Ukuran Kemasan',
+      'Kualitas Video Full HD 1080p Vertikal Jernih & Halus',
+      'Animasi Ornamen Bunga & Kaligrafi Tipografi Lembut',
+      'Pilihan Musik & Lagu Romantis Sesuai Selera Pengantin',
+      'Pengerjaan Kilat 1-2 Hari Kerja Langsung Siap Disebar',
+      'Revisi Teks Tanggal, Nama Mempelai, & Titik Lokasi Acara',
     ],
   },
   {
     id: 'srv-5',
-    name: 'Cetak Foto',
-    category: 'foto',
-    price: 15000,
-    priceLabel: 'Mulai Rp 15.000',
-    icon: '🖼️',
-    desc: 'Abadikan momen berharga dengan cetakan foto kualitas lab profesional yang tahan lama tidak mudah pudar.',
+    name: 'Undangan Khitanan, Aqiqah & Acara Keluarga',
+    category: 'undangan-acara',
+    price: 1500,
+    priceLabel: 'Mulai Rp 1.500 / pcs',
+    icon: '👶',
+    desc: 'Undangan bertema ceria & islami untuk tasyakuran Aqiqah, Khitanan anak, Ulang Tahun, dan syukuran keluarga dengan hasil cetak tajam memikat.',
     features: [
-      'Cetak Foto Kanvas & Pigment Ink High-Res',
-      'Pilihan Bingkai Frame Minimalis Modern',
-      'Cetak Pasfoto Kilat Aneka Ukuran (2x3, 3x4, 4x6)',
-      'Album Foto Kolase & Photobook Kenangan',
+      'Kertas Art Carton Tebal dengan Hasil Cetak Tajam & Cerah',
+      'Tema Desain Karakter Ceria, Warna Pastel & Ornamen Islami',
+      'Free Plastik OPP Pembungkus Rapi Tiap Lembar Undangan',
+      'Paket Bundling Stiker Label Bento / Box Nasi Syukuran',
+      'Proses Cepat 2-4 Hari Kerja Siap Diambil / Dikirim',
     ],
   },
   {
     id: 'srv-6',
-    name: 'Cetak Custom',
-    category: 'custom',
-    price: 10000,
-    priceLabel: 'Mulai Rp 10.000',
-    icon: '🧾',
-    desc: 'Pembuatan nota kasir/faktur NCR, cetak tiket acara/gelang, voucher kupon, karcis, hingga sertifikat event.',
+    name: 'Perlengkapan Acara, Buku Tamu & Souvenir Kit',
+    category: 'perlengkapan',
+    price: 45000,
+    priceLabel: 'Mulai Rp 45.000',
+    icon: '🎁',
+    desc: 'Perlengkapan pelengkap pesta resepsi pernikahan: Guest Book hardcover custom nama mempelai, Welcome Sign easel board, dan kartu suvenir.',
     features: [
-      'Buku Nota / Faktur NCR Bebas Karbon (2-4 Ply)',
-      'Cetak Tiket Acara, Gelang Konser & Karcis',
-      'Finishing Nomorator Otomatis & Porporasi Sobek',
-      'Cetak Piagam Sertifikat, ID Card & Map Folder',
+      'Buku Tamu (Guest Book) Hardcover Custom Nama & Foto Pengantin',
+      'Welcome Sign Acrylic / Foam Board untuk Easel Masuk Gedung',
+      'Kartu Ucapan Terima Kasih Souvenir & Kupon Pengambilan',
+      'Stiker Segel Amplop & Label Barcode Meja Tamu',
+      'Desain Selaras dengan Konsep & Tema Undangan Utama',
     ],
   },
 ];
@@ -131,104 +137,104 @@ const DEFAULT_SERVICES = [
 const DEFAULT_ORDERS = [
   {
     id: 'ORD-1001',
-    customerName: 'Ahmad Fauzi (Kopi Santai)',
-    customerPhone: '6281298765432',
-    serviceName: 'Label Stiker',
-    totalPrice: 180000,
-    orderDate: '2026-08-28',
+    customerName: 'Rina & Dimas',
+    customerPhone: '6285712349988',
+    serviceName: 'Undangan Hardcover Eksklusif',
+    totalPrice: 1800000,
+    orderDate: '2026-09-18',
     status: 'Selesai',
-    notes: 'Bahan Vinyl Glossy anti air, cutting kiss-cut 500 pcs untuk botol kopi.',
+    notes: 'Undangan hardcover tema sage green + gold foil timbul 400 pcs.',
   },
   {
     id: 'ORD-1002',
-    customerName: 'Rina & Dimas',
-    customerPhone: '6285712349988',
-    serviceName: 'Cetak Undangan',
-    totalPrice: 1250000,
-    orderDate: '2026-08-30',
+    customerName: 'Ayu & Rizky',
+    customerPhone: '6281298765432',
+    serviceName: 'Undangan Digital Website Interaktif',
+    totalPrice: 149000,
+    orderDate: '2026-09-20',
     status: 'Selesai',
-    notes: 'Undangan hardcover tema sage green + gold foil 300 pcs.',
+    notes: 'Paket website tema modern aesthetic + backsound instrumen & RSVP WhatsApp.',
   },
   {
     id: 'ORD-1003',
-    customerName: 'Siti Rahmawati',
+    customerName: 'Dian & Satria',
     customerPhone: '6289654321100',
-    serviceName: 'Jasa Desain',
-    totalPrice: 250000,
-    orderDate: '2026-09-02',
+    serviceName: 'Video Undangan Animasi HD',
+    totalPrice: 75000,
+    orderDate: '2026-09-22',
     status: 'Diproses',
-    notes: 'Desain logo UMKM bakery & packaging box, revisi tahap 1.',
+    notes: 'Video story HD 30 detik tema floral gold, musik Payung Teduh.',
   },
   {
     id: 'ORD-1004',
-    customerName: 'Budi Santoso (PT Indo Logistik)',
+    customerName: 'Keluarga Bpk. Ridwan',
     customerPhone: '6281344556677',
-    serviceName: 'Print',
-    totalPrice: 420000,
-    orderDate: '2026-09-04',
+    serviceName: 'Undangan Khitanan, Aqiqah & Acara Keluarga',
+    totalPrice: 375000,
+    orderDate: '2026-09-24',
     status: 'Diproses',
-    notes: 'Print 15 jilid proposal hard cover finishing laminasi doff.',
+    notes: 'Undangan aqiqah pastel biru 250 pcs + 250 stiker bento syukuran.',
   },
   {
     id: 'ORD-1005',
-    customerName: 'Keluarga Wijaya',
+    customerName: 'Kevin & Vania',
     customerPhone: '6282133445566',
-    serviceName: 'Cetak Foto',
-    totalPrice: 175000,
-    orderDate: '2026-09-05',
+    serviceName: 'Perlengkapan Acara, Buku Tamu & Souvenir Kit',
+    totalPrice: 220000,
+    orderDate: '2026-09-26',
     status: 'Menunggu',
-    notes: 'Cetak foto keluarga 12R + frame kayu minimalis hitam.',
+    notes: '2 Buku tamu hardcover foil emas + 500 pcs kartu souvenir thank you.',
   },
 ];
 
 const DEFAULT_PORTFOLIO = [
   {
     id: 'p-1',
-    title: 'Brand Identity & Kemasan Kopi Nusantara',
-    category: 'desain',
-    categoryLabel: 'Jasa Desain',
-    imgUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&auto=format&fit=crop&q=80',
-    desc: 'Pengembangan visual logo modern, palet warna, dan desain packaging kantong kopi artisan.',
+    title: 'Undangan Hardcover Emerald Green & Hot Print Gold Foil',
+    category: 'undangan-cetak',
+    categoryLabel: 'Undangan Cetak Mewah',
+    imgUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80',
+    desc: 'Undangan pernikahan hardcover board tebal dengan balutan kertas Jasmine hijau zamrud, kaligrafi foil emas mengkilap, dan wax seal cap stempel lilin.',
   },
   {
     id: 'p-2',
-    title: 'Undangan Rustic Emas "Nadia & Reza"',
-    category: 'undangan',
-    categoryLabel: 'Cetak Undangan',
-    imgUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80',
-    desc: 'Undangan hardcover bahan Jasmine dengan sentuhan gold foil kaligrafi dan pita beludru.',
+    title: 'Undangan Website Digital Interaktif "Ayu & Rizky"',
+    category: 'undangan-digital',
+    categoryLabel: 'Undangan Digital Web',
+    imgUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80',
+    desc: 'Undangan website mobile responsif tema modern beige dilengkapi audio latar romantis, RSVP WhatsApp otomatis, amplop digital, dan Google Maps presisi.',
   },
   {
     id: 'p-3',
-    title: 'Label Stiker Kemasan Minuman Dingin',
-    category: 'stiker',
-    categoryLabel: 'Label Stiker',
-    imgUrl: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&auto=format&fit=crop&q=80',
-    desc: 'Stiker vinyl matte tahan air dingin dan es batu, cutting presisi sesuai kontur logo.',
+    title: 'Video Undangan Animasi Story "Dian & Satria" (Full HD)',
+    category: 'undangan-video',
+    categoryLabel: 'Video Undangan Animasi',
+    imgUrl: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&auto=format&fit=crop&q=80',
+    desc: 'Video undangan animasi berdurasi 30 detik untuk WhatsApp Status & Instagram Story dengan ornamen floral watercolor dan transisi elegan.',
   },
   {
     id: 'p-4',
-    title: 'Print Poster & Display Seni A3+ High-Res',
-    category: 'print',
-    categoryLabel: 'Print',
-    imgUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800&auto=format&fit=crop&q=80',
-    desc: 'Cetak poster pameran dengan kertas Art Carton 260gr dan laminasi doff anti-silau.',
+    title: 'Undangan Softcover Floral Rustic "Sarah & Kevin"',
+    category: 'undangan-cetak',
+    categoryLabel: 'Undangan Cetak Softcover',
+    imgUrl: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&auto=format&fit=crop&q=80',
+    desc: 'Undangan softcover bahan Art Carton 310gr dengan laminasi doff lembut, dihiasi tali rami rustic dan kartu ucapan souvenir senada.',
   },
   {
     id: 'p-5',
-    title: 'Cetak Kanvas & Frame Galeri Minimalis',
-    category: 'foto',
-    categoryLabel: 'Cetak Foto',
+    title: 'Undangan Tasyakuran Aqiqah & Tasmiyah "Baby Rayyan"',
+    category: 'undangan-acara',
+    categoryLabel: 'Undangan Aqiqah & Acara',
     imgUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&auto=format&fit=crop&q=80',
-    desc: 'Cetak foto kanvas premium dengan bingkai kayu natural tanpa kaca untuk estetika galeri.',
+    desc: 'Undangan aqiqah pastel biru muda dengan cetak foto bayi beresolusi tinggi, plus bundling stiker bento syukuran dan plastik kemasan rapi.',
   },
   {
     id: 'p-6',
-    title: 'Buku Nota NCR Rangkap & Tiket Acara Musik',
-    category: 'custom',
-    categoryLabel: 'Cetak Custom',
+    title: 'Guest Book Hardcover & Welcome Sign Akrilik "Kevin & Vania"',
+    category: 'perlengkapan',
+    categoryLabel: 'Perlengkapan Acara',
     imgUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&auto=format&fit=crop&q=80',
-    desc: 'Cetak buku nota kasir NCR 3 ply logo usaha dan tiket konser dengan porporasi sobek rapi serta nomorator urut.',
+    desc: 'Buku tamu resepsi hardcover jilid jahit benang dengan foil nama emas, disertai papan selamat datang akrilik transparan untuk area depan gedung.',
   },
 ];
 
@@ -243,11 +249,11 @@ function getSettings() {
     }
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed.studioName === 'SESIKREASI' || !parsed.studioName) {
+      if (parsed.studioName === 'KREAKITA' || !parsed.studioName) {
         parsed.studioName = 'SESIKREASI';
-        if (parsed.email === 'sesikreasi@gmail.com') parsed.email = 'sesikreasi@gmail.com';
-        if (parsed.instagram === '@sesikreasi.std') parsed.instagram = '@sesikreasi.std';
-        if (parsed.tiktok === '@sesikreasi.std') parsed.tiktok = '@sesikreasi.std';
+        if (parsed.email === 'kontak@kreakita.com') parsed.email = 'kontak@sesikreasi.com';
+        if (parsed.instagram === '@kreakita.studio') parsed.instagram = '@sesikreasi.studio';
+        if (parsed.tiktok === '@kreakita.studio') parsed.tiktok = '@sesikreasi.studio';
       }
       saveSettings(parsed);
       return { ...DEFAULT_SETTINGS, ...parsed };
@@ -861,12 +867,14 @@ function setupChatbot(settings, services) {
   }
 
   function triggerGreeting() {
-    const welcomeText = `Halo! 👋 Selamat datang di <strong>${settings.studioName}</strong>.<br>Ada yang bisa kami bantu untuk kebutuhan desain grafis atau cetak Anda hari ini?`;
+    const welcomeText = `Halo! 👋 Selamat datang di <strong>${settings.studioName} - Spesialis Undangan & Cetak Acara</strong>.<br>Sedang merencanakan hari bahagia pernikahan, tasyakuran aqiqah, atau acara spesial keluarga? Ada yang bisa kami bantu?`;
     const quickReplies = [
-      '✨ Lihat Daftar Layanan',
-      '📋 Cara Pemesanan',
-      '💰 Tanya Harga / Konsultasi',
-      '📍 Lokasi & Jam Buka',
+      '💌 Undangan Cetak Mewah',
+      '🌐 Undangan Website Digital',
+      '🎬 Video Undangan Animasi',
+      '👶 Undangan Aqiqah & Acara',
+      '💰 Estimasi Biaya Undangan',
+      '📋 Alur & Cara Pemesanan',
     ];
     appendBotMessage(welcomeText, null, quickReplies);
   }
@@ -883,84 +891,210 @@ function setupChatbot(settings, services) {
   }
 
   function processRuleBasedResponse(lower) {
-    // 1. LIHAT DAFTAR LAYANAN
+    // 1. LIHAT DAFTAR LAYANAN / PRODUK UNDANGAN
     if (
       lower.includes('layanan') ||
       lower.includes('daftar') ||
       lower.includes('produk') ||
-      lower.includes('jasa')
+      lower.includes('katalog')
     ) {
-      const serviceListText = `Kami menyediakan 6 layanan utama:<br>
-      • 🎨 <strong>Jasa Desain:</strong> Logo, Feed Sosmed, Banner<br>
-      • 💌 <strong>Cetak Undangan:</strong> Hardcover/Softcover, Foil<br>
-      • 🖨️ <strong>Print:</strong> Dokumen, Poster A3+, Jilid<br>
-      • 🏷️ <strong>Label Stiker:</strong> Vinyl, Chromo, Anti Air<br>
-      • 🖼️ <strong>Cetak Foto:</strong> Kanvas, Frame Minimalis<br>
-      • 🧾 <strong>Cetak Custom:</strong> Nota NCR, Tiket Acara, Kupon<br><br>
-      Ingin konsultasi salah satu layanan di atas?`;
+      const serviceListText = `<strong>${settings.studioName}</strong> adalah studio spesialis undangan lengkap:<br>
+      • 💌 <strong>Undangan Hardcover:</strong> Board tebal, hot print emas/rose gold, pita & wax seal.<br>
+      • 📜 <strong>Undangan Softcover:</strong> Art Carton tebal doff elegan, motif rustic/floral.<br>
+      • 🌐 <strong>Undangan Website Digital:</strong> Link responsif tanpa batas tamu, RSVP WhatsApp, Maps, musik.<br>
+      • 🎬 <strong>Video Animasi HD:</strong> Format Reels/Story vertikal, musik romantis, siap sebar 1-2 hari.<br>
+      • 👶 <strong>Undangan Aqiqah & Khitan:</strong> Desain ceria & islami, bundling stiker bento.<br>
+      • 🎁 <strong>Perlengkapan Acara:</strong> Buku tamu hardcover cetak nama, welcome sign, kartu suvenir.<br><br>
+      Tertarik konsultasi jenis undangan yang mana?`;
 
-      const waMsg = 'Halo SESIKREASI, saya ingin menanyakan daftar layanan dan penawaran terbaik.';
+      const waMsg = 'Halo SESIKREASI, saya ingin menanyakan katalog layanan undangan spesialis dan promo terbarunya.';
       const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
+        label: 'Konsultasi via WhatsApp',
         url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
       };
-      const quickReplies = ['📋 Cara Pemesanan', '💰 Tanya Harga / Konsultasi'];
+      const quickReplies = ['💌 Undangan Cetak Mewah', '🌐 Undangan Website Digital', '💰 Estimasi Biaya Undangan'];
       appendBotMessage(serviceListText, actionBtn, quickReplies);
       return;
     }
 
-    // 2. CARA PEMESANAN
+    // 2. SPESIFIK: UNDANGAN CETAK (HARDCOVER / SOFTCOVER / FOIL)
+    if (
+      lower.includes('cetak') ||
+      lower.includes('hardcover') ||
+      lower.includes('softcover') ||
+      lower.includes('foil') ||
+      lower.includes('emboss') ||
+      lower.includes('fisik')
+    ) {
+      const cetakText = `💌 <strong>Layanan Undangan Cetak Mewah:</strong><br>
+      • <strong>Hardcover Eksklusif:</strong> Menggunakan Board No. 30/40 kokoh dilapisi kertas Jasmine glitter, sentuhan hot print foil emas/rose gold timbul, pita satin & cap lilin (wax seal).<br>
+      • <strong>Softcover Elegan:</strong> Menggunakan Art Carton 260/310gr laminasi doff lembut anti-silau.<br>
+      • <strong>Bonus Lengkap:</strong> Free plastik pembungkus OPP, cetak label nama tamu, kartu ucapan terima kasih souvenir, plus bonus video reels undangan untuk minimal pemesanan tertentu!`;
+
+      const waMsg = 'Halo SESIKREASI, saya ingin konsultasi cetak undangan fisik (hardcover/softcover) dan cek sampel bahan.';
+      const actionBtn = {
+        label: 'Tanya Sampel via WhatsApp',
+        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
+      };
+      const quickReplies = ['💰 Estimasi Biaya Undangan', '📋 Alur & Cara Pemesanan'];
+      appendBotMessage(cetakText, actionBtn, quickReplies);
+      return;
+    }
+
+    // 3. SPESIFIK: UNDANGAN WEBSITE DIGITAL
+    if (
+      lower.includes('digital') ||
+      lower.includes('web') ||
+      lower.includes('website') ||
+      lower.includes('online') ||
+      lower.includes('rsvp') ||
+      lower.includes('link')
+    ) {
+      const webText = `🌐 <strong>Undangan Website Digital Interaktif:</strong><br>
+      Solusi modern menyebarkan undangan praktis ke teman, sahabat, dan kerabat jauh:<br>
+      • <strong>Tanpa Batas Tamu:</strong> Masukkan nama tamu personal tanpa batas kuota.<br>
+      • <strong>Fitur Lengkap:</strong> RSVP WhatsApp otomatis, navigasi Google Maps/Waze, countdown hari H, galeri foto pre-wedding, background musik romantis, dan amplop digital.<br>
+      • <strong>Pengerjaan Cepat:</strong> 1–2 hari kerja siap disebar! Promo mulai Rp 99.000 / paket aktif hingga hari H.`;
+
+      const waMsg = 'Halo SESIKREASI, saya ingin pesan undangan website digital interaktif untuk pernikahan/acara.';
+      const actionBtn = {
+        label: 'Pesan Undangan Website',
+        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
+      };
+      const quickReplies = ['🎬 Video Undangan Animasi', '💰 Estimasi Biaya Undangan'];
+      appendBotMessage(webText, actionBtn, quickReplies);
+      return;
+    }
+
+    // 4. SPESIFIK: VIDEO UNDANGAN ANIMASI
+    if (
+      lower.includes('video') ||
+      lower.includes('animasi') ||
+      lower.includes('story') ||
+      lower.includes('reels') ||
+      lower.includes('status')
+    ) {
+      const videoText = `🎬 <strong>Video Undangan Animasi Story HD:</strong><br>
+      Format video gerak estetis 15–60 detik resolusi Full HD 1080p vertikal 9:16:<br>
+      • Pas untuk diunggah di Instagram Story, Reels, TikTok & WhatsApp Status.<br>
+      • Dilengkapi animasi ornamen bunga/rustic halus, kaligrafi nama pengantin, dan lagu romantis favorit Anda.<br>
+      • Harga sangat terjangkau mulai Rp 65.000 dengan proses kilat 1–2 hari kerja!`;
+
+      const waMsg = 'Halo SESIKREASI, saya ingin membuat video undangan animasi HD untuk disebar di sosmed.';
+      const actionBtn = {
+        label: 'Pesan Video Undangan',
+        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
+      };
+      const quickReplies = ['🌐 Undangan Website Digital', '📋 Alur & Cara Pemesanan'];
+      appendBotMessage(videoText, actionBtn, quickReplies);
+      return;
+    }
+
+    // 5. SPESIFIK: AQIQAH & ACARA KELUARGA
+    if (
+      lower.includes('aqiqah') ||
+      lower.includes('khitan') ||
+      lower.includes('sunat') ||
+      lower.includes('ulang tahun') ||
+      lower.includes('syukuran') ||
+      lower.includes('bayi')
+    ) {
+      const aqiqahText = `👶 <strong>Undangan Aqiqah, Khitan & Acara Keluarga:</strong><br>
+      Kami melayani pembuatan undangan syukuran keluarga penuh makna:<br>
+      • Desain karakter ceria, pastel, atau ornamen islami elegan.<br>
+      • Cetak tajam foto si kecil pada kertas tebal berkualitas.<br>
+      • Free plastik kemasan rapi & tersedia paket hemat bundling stiker label bento nasi box syukuran.<br>
+      • Harga mulai Rp 1.500 / pcs dengan pengerjaan 2–4 hari kerja.`;
+
+      const waMsg = 'Halo SESIKREASI, saya ingin konsultasi undangan tasyakuran Aqiqah / Khitanan / Acara Keluarga.';
+      const actionBtn = {
+        label: 'Tanya Paket via WhatsApp',
+        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
+      };
+      const quickReplies = ['💰 Estimasi Biaya Undangan', '📋 Alur & Cara Pemesanan'];
+      appendBotMessage(aqiqahText, actionBtn, quickReplies);
+      return;
+    }
+
+    // 6. SPESIFIK: BUKU TAMU & PERLENGKAPAN ACARA
+    if (
+      lower.includes('buku tamu') ||
+      lower.includes('guest book') ||
+      lower.includes('welcome') ||
+      lower.includes('souvenir') ||
+      lower.includes('perlengkapan')
+    ) {
+      const perlengkapanText = `🎁 <strong>Perlengkapan Resepsi Pernikahan:</strong><br>
+      Lengkapi momen pesta dengan detail berkelas yang selaras:<br>
+      • <strong>Guest Book Hardcover:</strong> Buku tamu eksklusif cetak nama & foto mempelai dengan jahit benang kuat.<br>
+      • <strong>Welcome Sign:</strong> Papan ucapan selamat datang acrylic / foam board untuk dipasang di easel masuk gedung.<br>
+      • <strong>Kartu Souvenir:</strong> Thank You card souvenir & kupon penukaran souvenir senada dengan tema undangan.`;
+
+      const waMsg = 'Halo SESIKREASI, saya butuh perlengkapan resepsi (buku tamu hardcover / welcome sign / kartu souvenir).';
+      const actionBtn = {
+        label: 'Pesan Perlengkapan Acara',
+        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
+      };
+      const quickReplies = ['💌 Undangan Cetak Mewah', '💰 Estimasi Biaya Undangan'];
+      appendBotMessage(perlengkapanText, actionBtn, quickReplies);
+      return;
+    }
+
+    // 7. CARA PEMESANAN & REVISI
     if (
       lower.includes('cara') ||
       lower.includes('pesan') ||
       lower.includes('order') ||
-      lower.includes('alur')
+      lower.includes('alur') ||
+      lower.includes('revisi')
     ) {
-      const orderStepsText = `Cara pesan di <strong>${settings.studioName}</strong> sangat mudah:<br>
-      1️⃣ <strong>Konsultasi:</strong> Kirim konsep/file via WhatsApp.<br>
-      2️⃣ <strong>Preview & Approval:</strong> Kami buatkan mockup digital.<br>
-      3️⃣ <strong>Produksi:</strong> Proses cetak presisi kualitas tinggi.<br>
-      4️⃣ <strong>Pengiriman/Ambil:</strong> Kirim ke alamat atau ambil di studio.<br><br>
-      Mulai pesanan Anda sekarang bersama tim kami:`;
+      const orderStepsText = `Cara pesan undangan di <strong>${settings.studioName}</strong> sangat praktis:<br>
+      1️⃣ <strong>Konsultasi & Kirim Data:</strong> Tentukan model undangan, kirim nama mempelai/acara, tanggal, & konsep via WhatsApp.<br>
+      2️⃣ <strong>Preview Desain Digital:</strong> Tim spesialis kami membuat draf desain. Anda bebas mengajukan revisi hingga pas.<br>
+      3️⃣ <strong>ACC & Produksi:</strong> Setelah ACC final, undangan masuk dapur cetak presisi / rilis link website.<br>
+      4️⃣ <strong>Pengecekan & Pengiriman:</strong> Hasil dicek teliti lalu siap diambil di studio atau dikirim ke alamat Anda.<br><br>
+      Mari mulai diskusikan rencana undangan Anda bersama tim desainer kami:`;
 
-      const waMsg = 'Halo SESIKREASI, saya ingin memulai pemesanan baru.';
+      const waMsg = 'Halo SESIKREASI, saya ingin memulai konsultasi pemesanan undangan.';
       const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
+        label: 'Mulai Diskusi via WhatsApp',
         url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
       };
-      const quickReplies = ['💰 Tanya Harga / Konsultasi', '✨ Lihat Daftar Layanan'];
+      const quickReplies = ['💰 Estimasi Biaya Undangan', '💌 Undangan Cetak Mewah'];
       appendBotMessage(orderStepsText, actionBtn, quickReplies);
       return;
     }
 
-    // 3. TANYA HARGA / KONSULTASI
+    // 8. TANYA HARGA & WAKTU PENGERJAAN
     if (
       lower.includes('harga') ||
       lower.includes('biaya') ||
       lower.includes('tarif') ||
-      lower.includes('konsul') ||
-      lower.includes('diskon')
+      lower.includes('lama') ||
+      lower.includes('berapa hari') ||
+      lower.includes('waktu') ||
+      lower.includes('promo')
     ) {
-      const priceText = `Harga di <strong>${settings.studioName}</strong> sangat terjangkau & transparan:<br>
-      • Desain mulai Rp 75rb<br>
-      • Undangan mulai Rp 2.500/pcs<br>
-      • Print mulai Rp 1.000/lbr<br>
-      • Stiker mulai Rp 12.000/A3+<br>
-      • Foto mulai Rp 15.000<br>
-      • Cetak Custom (Nota/Tiket) mulai Rp 10.000<br><br>
-      Tersedia <em>Konsultasi Gratis</em> untuk menghitung estimasi biaya sesuai jumlah pesanan Anda!`;
+      const priceText = `💰 <strong>Daftar Estimasi Biaya & Waktu Pengerjaan:</strong><br>
+      • <strong>Undangan Hardcover:</strong> Mulai Rp 4.500/pcs (7–14 hari kerja)<br>
+      • <strong>Undangan Softcover:</strong> Mulai Rp 2.500/pcs (5–7 hari kerja)<br>
+      • <strong>Undangan Web Digital:</strong> Promo Rp 99.000/paket (1–2 hari kerja)<br>
+      • <strong>Video Undangan HD:</strong> Mulai Rp 65.000/video (1–2 hari kerja)<br>
+      • <strong>Undangan Aqiqah/Khitan:</strong> Mulai Rp 1.500/pcs (2–4 hari kerja)<br>
+      • <strong>Guest Book Hardcover:</strong> Mulai Rp 45.000/buku<br><br>
+      Tersedia <em>Kalkulator Simulasi</em> di menu Layanan & Harga atau konsultasikan jumlah pesanan Anda untuk penawaran paket terbaik!`;
 
-      const waMsg = 'Halo SESIKREASI, saya ingin tanya rincian harga dan konsultasi gratis.';
+      const waMsg = 'Halo SESIKREASI, saya ingin menanyakan rincian harga paket undangan sesuai jumlah tamu saya.';
       const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
+        label: 'Hitung Paket via WhatsApp',
         url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
       };
-      const quickReplies = ['📋 Cara Pemesanan', '✨ Lihat Daftar Layanan'];
+      const quickReplies = ['📋 Alur & Cara Pemesanan', '💌 Undangan Cetak Mewah'];
       appendBotMessage(priceText, actionBtn, quickReplies);
       return;
     }
 
-    // 4. LOKASI & JAM BUKA
+    // 9. LOKASI & JAM BUKA
     if (
       lower.includes('lokasi') ||
       lower.includes('alamat') ||
@@ -969,71 +1103,21 @@ function setupChatbot(settings, services) {
       lower.includes('toko') ||
       lower.includes('tempat')
     ) {
-      const locationText = `📍 <strong>Alamat Studio:</strong><br>${settings.address}<br><br>
-      🕒 <strong>Jam Operasional:</strong><br>${settings.openingHours}<br><br>
-      Anda juga bisa pesan secara online tanpa harus datang langsung:`;
+      const locationText = `📍 <strong>Alamat Studio Undangan:</strong><br>${settings.address}<br><br>
+      🕒 <strong>Jam Konsultasi:</strong><br>${settings.openingHours}<br><br>
+      Bisa datang langsung ke studio untuk melihat langsung sampel fisik undangan atau konsultasi online 100% praktis lewat WhatsApp:`;
 
-      const waMsg = 'Halo SESIKREASI, saya ingin info lokasi studio dan konsultasi pesanan.';
+      const waMsg = 'Halo SESIKREASI, saya ingin info lokasi studio dan janji temu konsultasi undangan.';
       const actionBtn = {
         label: 'Lanjutkan ke WhatsApp',
         url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
       };
-      const quickReplies = ['✨ Lihat Daftar Layanan', '💰 Tanya Harga / Konsultasi'];
+      const quickReplies = ['💌 Undangan Cetak Mewah', '💰 Estimasi Biaya Undangan'];
       appendBotMessage(locationText, actionBtn, quickReplies);
       return;
     }
 
-    // 5. SPESIFIK: STIKER
-    if (lower.includes('stiker') || lower.includes('label')) {
-      const stikerText = `🏷️ <strong>Label Stiker SESIKREASI:</strong><br>
-      Tersedia bahan Vinyl (anti air, tidak mudah sobek) dan Chromo (ekonomis). Lengkap dengan cutting presisi kiss-cut siap tempel.<br><br>
-      Bisa kirim file siap cetak atau kami bantu buatkan desainnya!`;
-      const waMsg = 'Halo SESIKREASI, saya butuh cetak label stiker kemasan produk.';
-      const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
-        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
-      };
-      appendBotMessage(stikerText, actionBtn, ['✨ Layanan Lainnya', '💰 Cek Harga']);
-      return;
-    }
-
-    // 6. SPESIFIK: UNDANGAN
-    if (lower.includes('undangan') || lower.includes('nikah') || lower.includes('wedding')) {
-      const undanganText = `💌 <strong>Cetak Undangan Elegan:</strong><br>
-      Pilihan bahan tebal premium, laminasi doff, foil emas, free plastik & kartu souvenir. Minimal order terjangkau & pengerjaan rapi.`;
-      const waMsg = 'Halo SESIKREASI, saya ingin konsultasi cetak undangan pernikahan/acara.';
-      const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
-        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
-      };
-      appendBotMessage(undanganText, actionBtn, ['📋 Cara Pemesanan', '💰 Estimasi Biaya']);
-      return;
-    }
-
-    // 7. SPESIFIK: CETAK CUSTOM (NOTA, TIKET, KUPON)
-    if (
-      lower.includes('nota') ||
-      lower.includes('tiket') ||
-      lower.includes('custom') ||
-      lower.includes('kustom') ||
-      lower.includes('karcis') ||
-      lower.includes('kupon') ||
-      lower.includes('faktur') ||
-      lower.includes('kwitansi')
-    ) {
-      const customText = `🧾 <strong>Cetak Custom (Nota, Tiket & Kupon):</strong><br>
-      Kami melayani pembuatan nota NCR rangkap (bebas karbon) 2-4 ply dengan nomorator urut & porporasi sobek rapi, cetak tiket acara/konser dengan barcode/nomorator, karcis parkir, voucher belanja, dan sertifikat event.<br><br>
-      Bisa disesuaikan dengan logo dan nama usaha Anda!`;
-      const waMsg = 'Halo SESIKREASI, saya ingin pesan cetak custom (nota / tiket acara / lainnya).';
-      const actionBtn = {
-        label: 'Lanjutkan ke WhatsApp',
-        url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
-      };
-      appendBotMessage(customText, actionBtn, ['📋 Cara Pemesanan', '💰 Estimasi Biaya']);
-      return;
-    }
-
-    // 8. PORTOFOLIO / CONTOH KARYA / MEDIA SOSIAL
+    // 10. PORTOFOLIO / CONTOH KARYA / MEDIA SOSIAL
     if (
       lower.includes('portofolio') ||
       lower.includes('contoh') ||
@@ -1044,31 +1128,31 @@ function setupChatbot(settings, services) {
       lower.includes('tiktok') ||
       lower.includes('sosmed')
     ) {
-      const igHandle = settings.instagram || '@sesikreasi.std';
-      const tiktokHandle = settings.tiktok || '@sesikreasi.std';
-      const portfolioText = `🎨 <strong>Contoh Karya & Portofolio SESIKREASI:</strong><br>
-      Anda dapat melihat 6 contoh karya terbaik kami di bagian <strong>Portofolio</strong> website ini.<br><br>
-      Untuk melihat lebih banyak contoh karya dan video proses pengerjaan, silakan kunjungi akun kami:<br>
+      const igHandle = settings.instagram || '@sesikreasi.studio';
+      const tiktokHandle = settings.tiktok || '@sesikreasi.studio';
+      const portfolioText = `🎨 <strong>Contoh Karya Undangan SESIKREASI:</strong><br>
+      Anda dapat melihat galeri undangan hardcover, digital web, dan video kami di bagian <strong>Portofolio</strong> website ini.<br><br>
+      Untuk melihat video unboxing undangan fisik, video animasi terbaru, dan review dari para mempelai, silakan kunjungi akun media sosial kami:<br>
       • 📸 <strong>Instagram:</strong> ${igHandle}<br>
       • 🎵 <strong>TikTok:</strong> ${tiktokHandle}`;
 
-      const waMsg = 'Halo SESIKREASI, saya ingin melihat contoh hasil karya lainnya.';
+      const waMsg = 'Halo SESIKREASI, saya ingin melihat contoh mockup undangan pernikahan lainnya.';
       const actionBtn = {
         label: 'Tanya Tim via WhatsApp',
         url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
       };
-      appendBotMessage(portfolioText, actionBtn, ['✨ Lihat Daftar Layanan', '💰 Tanya Harga / Konsultasi']);
+      appendBotMessage(portfolioText, actionBtn, ['💌 Undangan Cetak Mewah', '🌐 Undangan Website Digital']);
       return;
     }
 
-    // 9. DEFAULT / FALLBACK
-    const defaultText = `Terima kasih pertanyaannya! Tim desainer dan admin kami siap membantu langsung detail kebutuhan Anda melalui WhatsApp agar lebih cepat dan spesifik:`;
-    const waMsg = `Halo SESIKREASI, saya ingin bertanya tentang: "${lower}".`;
+    // 11. DEFAULT / FALLBACK
+    const defaultText = `Terima kasih atas pertanyaan Anda! Tim spesialis undangan <strong>${settings.studioName}</strong> siap mendampingi kebutuhan momen spesial Anda secara ramah melalui WhatsApp:`;
+    const waMsg = `Halo SESIKREASI, saya ingin berkonsultasi mengenai: "${lower}".`;
     const actionBtn = {
-      label: 'Lanjutkan ke WhatsApp',
+      label: 'Hubungi Tim via WhatsApp',
       url: getCleanWhatsAppUrl(settings.whatsappNumber, waMsg),
     };
-    const quickReplies = ['✨ Lihat Daftar Layanan', '💰 Tanya Harga / Konsultasi'];
+    const quickReplies = ['💌 Undangan Cetak Mewah', '🌐 Undangan Website Digital', '💰 Estimasi Biaya Undangan'];
     appendBotMessage(defaultText, actionBtn, quickReplies);
   }
 
@@ -1266,9 +1350,14 @@ function initAdmin() {
 
   // SERVICES MANAGEMENT
   const categoryLabels = {
-    desain: '🎨 Jasa Desain',
-    undangan: '💌 Cetak Undangan',
-    print: '🖨️ Print Dokumen',
+    'undangan-cetak': '💌 Undangan Cetak Mewah',
+    'undangan-digital': '🌐 Undangan Website Digital',
+    'undangan-video': '🎬 Video Undangan Animasi',
+    'undangan-acara': '👶 Undangan Aqiqah & Acara',
+    perlengkapan: '🎁 Perlengkapan & Buku Tamu',
+    desain: '🎨 Desain Custom Acara',
+    undangan: '💌 Undangan Cetak',
+    print: '🖨️ Cetak Dokumen',
     stiker: '🏷️ Label Stiker',
     foto: '🖼️ Cetak Foto',
     custom: '📦 Cetak Custom',
@@ -1671,7 +1760,7 @@ function initAdmin() {
     document.getElementById('settingEmail').value = settings.email || '';
     document.getElementById('settingInstagram').value = settings.instagram || '';
     const tiktokSettingField = document.getElementById('settingTiktok');
-    if (tiktokSettingField) tiktokSettingField.value = settings.tiktok || '@sesikreasi.std';
+    if (tiktokSettingField) tiktokSettingField.value = settings.tiktok || '@sesikreasi.studio';
 
     settingsForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -1683,7 +1772,7 @@ function initAdmin() {
         openingHours: document.getElementById('settingHours').value.trim(),
         email: document.getElementById('settingEmail').value.trim(),
         instagram: document.getElementById('settingInstagram').value.trim(),
-        tiktok: document.getElementById('settingTiktok') ? document.getElementById('settingTiktok').value.trim() : '@sesikreasi.std',
+        tiktok: document.getElementById('settingTiktok') ? document.getElementById('settingTiktok').value.trim() : '@sesikreasi.studio',
       };
 
       saveSettings(updated);
@@ -1783,16 +1872,16 @@ function initLayananPage() {
     });
 
     // Update Instagram & TikTok links
-    const igHandleText = currentSettings.instagram || '@sesikreasi.std';
+    const igHandleText = currentSettings.instagram || '@sesikreasi.studio';
     const igUsername = igHandleText.replace(/^@/, '').trim();
-    const igUrl = `https://www.instagram.com/sesikreasi.std/`;
+    const igUrl = `https://instagram.com/${igUsername}`;
 
     const footerIgLink = document.getElementById('footerIgLink');
     if (footerIgLink) footerIgLink.href = igUrl;
     const footerIgVal = document.getElementById('footerIgVal');
     if (footerIgVal) footerIgVal.textContent = igHandleText;
 
-    const tiktokHandleText = currentSettings.tiktok || '@sesikreasi.std';
+    const tiktokHandleText = currentSettings.tiktok || '@sesikreasi.studio';
     const tiktokUsername = tiktokHandleText.replace(/^@/, '').trim();
     const tiktokUrl = `https://tiktok.com/@${tiktokUsername}`;
 
@@ -1941,17 +2030,30 @@ function initLayananPage() {
 
       if (estimatorUnitLabel && selectedService) {
         switch (selectedService.category) {
+          case 'undangan-cetak':
           case 'undangan':
-            estimatorUnitLabel.textContent = 'Satuan: pcs / lembar undangan';
+            estimatorUnitLabel.textContent = 'Satuan: pcs / lembar undangan fisik';
+            break;
+          case 'undangan-digital':
+            estimatorUnitLabel.textContent = 'Satuan: paket website (aktif hingga hari H)';
+            break;
+          case 'undangan-video':
+            estimatorUnitLabel.textContent = 'Satuan: video animasi Full HD';
+            break;
+          case 'undangan-acara':
+            estimatorUnitLabel.textContent = 'Satuan: pcs / lembar undangan acara';
+            break;
+          case 'perlengkapan':
+            estimatorUnitLabel.textContent = 'Satuan: buku tamu / pcs perlengkapan';
+            break;
+          case 'desain':
+            estimatorUnitLabel.textContent = 'Satuan: paket / konsep desain acara';
             break;
           case 'print':
             estimatorUnitLabel.textContent = 'Satuan: lembar / jilid buku';
             break;
           case 'stiker':
             estimatorUnitLabel.textContent = 'Satuan: lembar A3+ / pcs stiker';
-            break;
-          case 'desain':
-            estimatorUnitLabel.textContent = 'Satuan: paket / konsep desain';
             break;
           case 'foto':
             estimatorUnitLabel.textContent = 'Satuan: lembar cetak foto / bingkai';
